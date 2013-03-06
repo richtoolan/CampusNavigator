@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+			xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+			xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+			creator="GMapToGarminGPX.py" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+	<rte>
+		<name>RTUCC</name>
+		<rtept lat="51.89564" lon="-8.48875">
+			<name>Point A</name>
+			<extensions>
+				<gpxx:RoutePointExtension>
+					<gpxx:rpt lat="51.89564" lon="-8.48875"/>
+					<gpxx:rpt lat="51.89563" lon="-8.48881"/>
+					<gpxx:rpt lat="51.89563" lon="-8.48881"/>
+					<gpxx:rpt lat="51.89548" lon="-8.48897"/>
+					<gpxx:rpt lat="51.89543" lon="-8.48902"/>
+					<gpxx:rpt lat="51.89542" lon="-8.48904"/>
+					<gpxx:rpt lat="51.89541" lon="-8.48904"/>
+					<gpxx:rpt lat="51.89526" lon="-8.48925"/>
+					<gpxx:rpt lat="51.89521" lon="-8.4893"/>
+					<gpxx:rpt lat="51.89505" lon="-8.48951"/>
+					<gpxx:rpt lat="51.89499" lon="-8.48956"/>
+					<gpxx:rpt lat="51.89486" lon="-8.48969"/>
+					<gpxx:rpt lat="51.89472" lon="-8.48982"/>
+					<gpxx:rpt lat="51.89455" lon="-8.48997"/>
+					<gpxx:rpt lat="51.89442" lon="-8.49014"/>
+					<gpxx:rpt lat="51.8944" lon="-8.49017"/>
+					<gpxx:rpt lat="51.89432" lon="-8.49033"/>
+					<gpxx:rpt lat="51.89423" lon="-8.49058"/>
+					<gpxx:rpt lat="51.8942" lon="-8.49076"/>
+					<gpxx:rpt lat="51.89419" lon="-8.49092"/>
+					<gpxx:rpt lat="51.8942" lon="-8.4911"/>
+					<gpxx:rpt lat="51.89421" lon="-8.49129"/>
+					<gpxx:rpt lat="51.89421" lon="-8.49153"/>
+					<gpxx:rpt lat="51.89421" lon="-8.49165"/>
+					<gpxx:rpt lat="51.89419" lon="-8.49186"/>
+					<gpxx:rpt lat="51.89418" lon="-8.49191"/>
+					<gpxx:rpt lat="51.89415" lon="-8.49205"/>
+					<gpxx:rpt lat="51.8941" lon="-8.49226"/>
+					<gpxx:rpt lat="51.89409" lon="-8.49228"/>
+					<gpxx:rpt lat="51.89404" lon="-8.49245"/>
+					<gpxx:rpt lat="51.89404" lon="-8.49247"/>
+					<gpxx:rpt lat="51.89401" lon="-8.49254"/>
+					<gpxx:rpt lat="51.89393" lon="-8.49271"/>
+					<gpxx:rpt lat="51.89392" lon="-8.49275"/>
+					<gpxx:rpt lat="51.89389" lon="-8.49281"/>
+					<gpxx:rpt lat="51.89384" lon="-8.49303"/>
+					<gpxx:rpt lat="51.8937" lon="-8.49388"/>
+					<gpxx:rpt lat="51.89369" lon="-8.49394"/>
+					<gpxx:rpt lat="51.89367" lon="-8.49404"/>
+					<gpxx:rpt lat="51.89364" lon="-8.49421"/>
+					<gpxx:rpt lat="51.89359" lon="-8.49446"/>
+					<gpxx:rpt lat="51.89359" lon="-8.49446"/>
+					<gpxx:rpt lat="51.89385" lon="-8.49466"/>
+					<gpxx:rpt lat="51.89393" lon="-8.49472"/>
+					<gpxx:rpt lat="51.89425" lon="-8.49497"/>
+					<gpxx:rpt lat="51.89425" lon="-8.49497"/>
+					<gpxx:rpt lat="51.89408" lon="-8.49575"/>
+					<gpxx:rpt lat="51.89401" lon="-8.49623"/>
+					<gpxx:rpt lat="51.89394" lon="-8.49649"/>
+					<gpxx:rpt lat="51.89391" lon="-8.49659"/>
+					<gpxx:rpt lat="51.8939" lon="-8.49665"/>
+					<gpxx:rpt lat="51.8939" lon="-8.49668"/>
+					<gpxx:rpt lat="51.89389" lon="-8.49682"/>
+					<gpxx:rpt lat="51.89388" lon="-8.49695"/>
+					<gpxx:rpt lat="51.89386" lon="-8.49706"/>
+					<gpxx:rpt lat="51.89385" lon="-8.4971"/>
+					<gpxx:rpt lat="51.89385" lon="-8.49711"/>
+					<gpxx:rpt lat="51.89385" lon="-8.49711"/>
+					<gpxx:rpt lat="51.8942" lon="-8.49727"/>
+					<gpxx:rpt lat="51.8942" lon="-8.49727"/>
+					<gpxx:rpt lat="51.89413" lon="-8.49767"/>
+					<gpxx:rpt lat="51.89412" lon="-8.49771"/>
+					<gpxx:rpt lat="51.8941" lon="-8.49785"/>
+					<gpxx:rpt lat="51.89396" lon="-8.49846"/>
+					<gpxx:rpt lat="51.89386" lon="-8.49897"/>
+					<gpxx:rpt lat="51.89386" lon="-8.49897"/>
+					<gpxx:rpt lat="51.89383" lon="-8.49903"/>
+					<gpxx:rpt lat="51.89377" lon="-8.49936"/>
+					<gpxx:rpt lat="51.89377" lon="-8.49936"/>
+					<gpxx:rpt lat="51.8937" lon="-8.49932"/>
+					<gpxx:rpt lat="51.8937" lon="-8.49932"/>
+					<gpxx:rpt lat="51.89361" lon="-8.49975"/>
+					<gpxx:rpt lat="51.89361" lon="-8.49978"/>
+					<gpxx:rpt lat="51.89359" lon="-8.49979"/>
+					<gpxx:rpt lat="51.89358" lon="-8.4998"/>
+					<gpxx:rpt lat="51.89356" lon="-8.4998"/>
+					<gpxx:rpt lat="51.89342" lon="-8.49973"/>
+				</gpxx:RoutePointExtension>
+			</extensions>
+		</rtept>
+		<rtept lat="51.89342" lon="-8.49973">
+			<name>Point B</name>
+		</rtept>
+	</rte>
+</gpx>

@@ -7,7 +7,7 @@
 //
 
 #import "CNAppDelegate.h"
-
+#import "CNRootViewController.h"
 @implementation CNAppDelegate
 
 - (void)dealloc
@@ -22,6 +22,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    CNRootViewController *rootVC = [[[CNRootViewController alloc] init] autorelease];
+    self.window.rootViewController = rootVC;
+    application.applicationSupportsShakeToEdit = YES;
+    //[self.window addSubview:rootVC.view];
     return YES;
 }
 
