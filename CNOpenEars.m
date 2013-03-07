@@ -134,19 +134,40 @@
     self.isListening = NO;
     [self.pocketsphinxController stopListening];
 }
-- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
-    [self stopListen];
+-(void)suspendRecognition{
+    
+    [self.pocketsphinxController suspendRecognition];
+    
+}
+-(void)resumeRecognition{
+    if(!self.isListening){
+        [self listen];
+    }
+    //this is also really really bad but will work for now.
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
     NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
     if(player != nil) [player release];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
     player.numberOfLoops = 1; //Infinite
+    player.delegate = self;
+    [player play];
+    //[self.pocketsphinxController resumeRecognition];
+}
+
+- (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
+    [self suspendRecognition];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    player = nil;
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = 1; //Infinite
     
     [player play];
+    //[hypothesis retain];
     if([hypothesis isEqualToString:@"(null)"]|| [hypothesis length] < 3 ){
         //Theres an error the sentence is either incomplete of we can't recognise what the user is saying
         [self speakSentence:@"Sorry I couldn't understand that."];
-        [self listen];
+        [self resumeRecognition];
     }else{
         if(confirmNav){
             confirmNav = NO;
@@ -155,28 +176,33 @@
                 //[self speakSentence:@""]
             
                 [delegate giveStringLocation:stringLocation];
-                [self stopListen];
+                [self suspendRecognition];
             }else if([hypothesis isEqualToString:@"NO"]){
                 //incorrect place try again
                 [self speakSentence:@"Speak command now"];
-                [self listen];
+                [self resumeRecognition];
                 
             }else{
                 //error please repeat
                 confirmNav = YES;
                 [self speakSentence:[NSString stringWithFormat:@"Sorry I didn't get that. Confirm Navigation to %@ ", stringLocation]];
-                [self listen];
+                [self resumeRecognition];
             }
         }
-       if ([hypothesis rangeOfString:@"TAKE ME"].location != NSNotFound ) {
+       else if ([hypothesis rangeOfString:@"TAKE ME"].location != NSNotFound ) {
            stringLocation = [[hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]retain];
-            [self speakSentence:[NSString stringWithFormat:@"Confirm Navigation to. %@", [hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]]];
+           stringLocation = [stringLocation stringByReplacingOccurrencesOfString:@"TO" withString:@""];
+           
+           stringLocation = [stringLocation stringByReplacingOccurrencesOfString:@"THE" withString:@""];
+           [stringLocation retain];
+            [self speakSentence:[NSString stringWithFormat:@"Confirm Navigation to. %@", stringLocation]];
            confirmNav = YES;
-           [delegate giveStringLocation:[hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]];
+           [self resumeRecognition];
+           //[delegate giveStringLocation:[hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]];
             //[self stopListen];
        }else{
            [self speakSentence:@"Sorry I didn't get that."];
-           [self listen];
+           [self resumeRecognition];
        }
         
         //[CNUtils displayAlertWithTitle:@"YOU SAID" andText:hypothesis andButtonText:@"OK"];
@@ -195,13 +221,8 @@
 }
 
 - (void) pocketsphinxDidStartListening {
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    if(player != nil) [player release];
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.numberOfLoops = 1; //Infinite
-    
-    [player play];
+    //[self.pocketsphinxController suspendRecognition];
+
 	NSLog(@"Pocketsphinx is now listening.");
 }
 
@@ -249,4 +270,15 @@
         [queue removeObject:[queue objectAtIndex:0]];
     }
 }
+
+
+#pragma AV PLayer Delegate methods
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"PLayer dur %f", player.duration);
+    //This is really really bad but a quick fix for now
+    if(player.duration <= 0.38){
+        [self.pocketsphinxController resumeRecognition];
+    }
+}
+
 @end

@@ -93,7 +93,7 @@ BOOL debug = YES;
                     [self.openEars speakSentence:@"Voice control stopped."];
                     [self.openEars stopListen];
                 }else{
-                    [self.openEars listen];
+                    [self.openEars resumeRecognition];
                 }
             }
             //[self.navigator beginNavigationToLocation:@"Western Gateway Building"];
@@ -111,6 +111,7 @@ BOOL debug = YES;
     CGRect parentFrame = self.view.frame;
     UIButton *compassButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [compassButton setBackgroundColor:BUTTON_COLOUR];
+    [compassButton addTarget:self action:@selector(debug) forControlEvents:UIControlEventTouchDown];
     [compassButton setImage:[UIImage imageNamed:@"compass.png"] forState:UIControlStateNormal];
     [compassButton setFrame:CGRectMake(BUTTON_GRID_SIZE , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     compassButton.tag = 0;
@@ -119,6 +120,8 @@ BOOL debug = YES;
     UIButton *locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [locateButton setBackgroundColor:BUTTON_COLOUR];
     [locateButton setImage:[UIImage imageNamed:@"locate.png"] forState:UIControlStateNormal];
+    
+    [locateButton addTarget:self action:@selector(debug) forControlEvents:UIControlEventTouchDown];
     [locateButton setFrame:CGRectMake(parentFrame.size.width/2 -( BUTTON_GRID_SIZE/2 + buttonSize) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     locateButton.tag = 1;
     [self.view addSubview:locateButton];
@@ -127,12 +130,16 @@ BOOL debug = YES;
     [nearButton setBackgroundColor:BUTTON_COLOUR];
     [nearButton setImage:[UIImage imageNamed:@"near.png"] forState:UIControlStateNormal];
     [nearButton setFrame:CGRectMake(parentFrame.size.width/2 +( BUTTON_GRID_SIZE/2 ) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
+    
+    [nearButton addTarget:self action:@selector(debug) forControlEvents:UIControlEventTouchDown];
     nearButton.tag = 2;
     [self.view addSubview:nearButton];
     
     UIButton *googleMapsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [googleMapsButton setBackgroundColor:BUTTON_COLOUR];
     [googleMapsButton setImage:[UIImage imageNamed:@"google_maps.png"] forState:UIControlStateNormal];
+    
+    [googleMapsButton addTarget:self action:@selector(debug) forControlEvents:UIControlEventTouchDown];
     [googleMapsButton setFrame:CGRectMake(parentFrame.size.width -( BUTTON_GRID_SIZE + buttonSize) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     googleMapsButton.tag = 3;
     [self.view addSubview:googleMapsButton];
@@ -250,7 +257,9 @@ BOOL debug = YES;
     }
     
 }
-
+-(void)debug{
+    debug = !debug;
+}
 -(void)giveStringLocation:(NSString *)text{
     NSLog(@"String is %@", text);
     if(![self.navigator isNavigating]){
@@ -259,7 +268,7 @@ BOOL debug = YES;
         
         [self.navigator stopNav];
         [self.openEars stopListen];
-        [self.openEars speakSentence:@"Navigation Stopped, shake device to start again."];
+        [self.openEars speakSentence:@"Navigation Stopped"];
     }
 }
 

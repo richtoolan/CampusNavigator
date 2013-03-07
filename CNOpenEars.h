@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <OpenEars/OpenEarsEventsObserver.h>
 #import <Slt/Slt.h>
+#import <AVFoundation/AVFoundation.h>
 @class PocketsphinxController;
 @class FliteController;
 @class CNOpenEarsDelegate;
-@class AVAudioPlayer;
 
-@interface CNOpenEars : NSObject <OpenEarsEventsObserverDelegate>{
+@interface CNOpenEars : NSObject <OpenEarsEventsObserverDelegate, AVAudioPlayerDelegate>{
     NSString *pathToDynamicallyGeneratedGrammar;
 	NSString *pathToDynamicallyGeneratedDictionary;
     NSMutableArray *queue;
@@ -49,4 +49,6 @@
 -(void)speakSentence:(NSString *)sentence;
 -(void)setUp;
 -(void)stopListen;
+-(void)resumeRecognition;
+-(void)suspendRecoginition;
 @end
