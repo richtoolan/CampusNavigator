@@ -133,8 +133,7 @@ didUpdateToLocation:(CLLocation *)newLocation
     
     //Check user hasn't gone off course
     //check how close user is to destination/next action
-    NSLog(@"Comparing path %i and %i", [[[self.pathFinder getNearestPointForLat:mostRecentLocation.coordinate.latitude AndLon:mostRecentLocation.coordinate.longitude] objectForKey:@"parentID"] intValue], [upComingAction.fromPath intValue]);
-    
+   
     //mostRecentLocation;
     //check distance between points and path
     //NSLog(@"cur time%f prev time %f sum %f", [[NSDate date] timeIntervalSince1970],timeSinceLastTurn, [[NSDate date] timeIntervalSince1970] - timeSinceLastTurn);
