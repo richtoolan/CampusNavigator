@@ -7,18 +7,86 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D218A51816C830AB002A860B /* OpenEars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D218A51716C830AB002A860B /* OpenEars.framework */; };
+		D21E60BF168336D0004F1C9E /* CNOpenEars.m in Sources */ = {isa = PBXBuildFile; fileRef = D21E60BE168336D0004F1C9E /* CNOpenEars.m */; };
+		D22AAEE516B9278000576016 /* UtilitiesGeo.c in Sources */ = {isa = PBXBuildFile; fileRef = D22AAEE416B9278000576016 /* UtilitiesGeo.c */; };
+		D22D95BF1677B6ED00EE8523 /* MapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95BE1677B6ED00EE8523 /* MapBox.framework */; };
+		D22D95C11677B70E00EE8523 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C01677B70E00EE8523 /* QuartzCore.framework */; };
+		D22D95C31677B71D00EE8523 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C21677B71D00EE8523 /* libz.dylib */; };
+		D22D95C51677B72A00EE8523 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C41677B72A00EE8523 /* libsqlite3.dylib */; };
+		D22D95C91677B7A600EE8523 /* MapBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D22D95C81677B7A600EE8523 /* MapBox.bundle */; };
 		D22E398516639F2B007D174B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398416639F2B007D174B /* UIKit.framework */; };
 		D22E398716639F2B007D174B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398616639F2B007D174B /* Foundation.framework */; };
 		D22E398916639F2B007D174B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398816639F2B007D174B /* CoreGraphics.framework */; };
 		D22E398F16639F2B007D174B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D22E398D16639F2B007D174B /* InfoPlist.strings */; };
 		D22E399116639F2B007D174B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E399016639F2B007D174B /* main.m */; };
 		D22E399516639F2B007D174B /* CNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E399416639F2B007D174B /* CNAppDelegate.m */; };
-		D22E399716639F2B007D174B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D22E399616639F2B007D174B /* Default.png */; };
-		D22E399916639F2B007D174B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D22E399816639F2B007D174B /* Default@2x.png */; };
-		D22E399B16639F2B007D174B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D22E399A16639F2B007D174B /* Default-568h@2x.png */; };
+		D22E39A316639F50007D174B /* CNRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E39A216639F50007D174B /* CNRootViewController.m */; };
+		D234AB7C16835C950011D563 /* feat.params in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6D16835C950011D563 /* feat.params */; };
+		D234AB7D16835C950011D563 /* mdef in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6E16835C950011D563 /* mdef */; };
+		D234AB7E16835C950011D563 /* means in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6F16835C950011D563 /* means */; };
+		D234AB7F16835C950011D563 /* noisedict in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7016835C950011D563 /* noisedict */; };
+		D234AB8016835C950011D563 /* sendump in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7116835C950011D563 /* sendump */; };
+		D234AB8116835C950011D563 /* transition_matrices in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7216835C950011D563 /* transition_matrices */; };
+		D234AB8216835C950011D563 /* variances in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7316835C950011D563 /* variances */; };
+		D234AB8416835C950011D563 /* OpenEars1.dic in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7516835C950011D563 /* OpenEars1.dic */; };
+		D234AB8516835C950011D563 /* OpenEars1.gram in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7616835C950011D563 /* OpenEars1.gram */; };
+		D234AB8616835C950011D563 /* OpenEars1.languagemodel in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7716835C950011D563 /* OpenEars1.languagemodel */; };
+		D234AB8716835C950011D563 /* OpenEars2.gram in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7816835C950011D563 /* OpenEars2.gram */; };
+		D234AB8816835C950011D563 /* OpenEarsCorpus.txt in Resources */ = {isa = PBXBuildFile; fileRef = D234AB7916835C950011D563 /* OpenEarsCorpus.txt */; };
+		D234AB8916835C950011D563 /* Slt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D234AB7A16835C950011D563 /* Slt.framework */; };
+		D234AB8C16836F4B0011D563 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = D234AB8A16836F4B0011D563 /* marker.png */; };
+		D234AB8D16836F4B0011D563 /* marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D234AB8B16836F4B0011D563 /* marker@2x.png */; };
+		D234AB901683A3DC0011D563 /* CNAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */; };
+		D23D50B216CFC4E400260794 /* CNLanguageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D23D50B116CFC4E400260794 /* CNLanguageModel.m */; };
+		D245A41B16A36DB70090A9A8 /* CNGeneralTree.m in Sources */ = {isa = PBXBuildFile; fileRef = D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */; };
+		D245A41E16A370300090A9A8 /* CNNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D245A41D16A370300090A9A8 /* CNNode.m */; };
+		D24F70051694BCF6002E7B34 /* volcab.gram in Resources */ = {isa = PBXBuildFile; fileRef = D24F70041694BCF6002E7B34 /* volcab.gram */; };
+		D25A10F916833D3C00640BD9 /* cmu07a.dic in Resources */ = {isa = PBXBuildFile; fileRef = D25A10F816833D3C00640BD9 /* cmu07a.dic */; };
+		D268E1831697560F00A67D49 /* FinalUCCMap.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = D268E1821697560F00A67D49 /* FinalUCCMap.mbtiles */; };
+		D277B3FA16E61FC0001CB603 /* StartBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D277B3F816E61FC0001CB603 /* StartBeep.mp3 */; };
+		D277B3FB16E61FC0001CB603 /* FinBeep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */; };
+		D277FBDF169ECC8B00A89C8B /* CNPathFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */; };
+		D27D23DF16A41A7D00F0A88E /* TreeList.c in Sources */ = {isa = PBXBuildFile; fileRef = D27D23DE16A41A7D00F0A88E /* TreeList.c */; };
+		D27E1E1716E4A308003A126C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D27E1E1516E4A308003A126C /* Default-568h@2x.png */; };
+		D27E1E1816E4A308003A126C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D27E1E1616E4A308003A126C /* Default@2x.png */; };
+		D295115016B2A41E00A9C098 /* PESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114716B2A41E00A9C098 /* PESGraph.m */; };
+		D295115116B2A41E00A9C098 /* PESGraphNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114916B2A41E00A9C098 /* PESGraphNode.m */; };
+		D295115216B2A41E00A9C098 /* PESGraphEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114B16B2A41E00A9C098 /* PESGraphEdge.m */; };
+		D295115316B2A41E00A9C098 /* PESGraphRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114D16B2A41E00A9C098 /* PESGraphRoute.m */; };
+		D295115416B2A41E00A9C098 /* PESGraphRouteStep.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114F16B2A41E00A9C098 /* PESGraphRouteStep.m */; };
+		D298BCC21664CACD007319A9 /* CNUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D298BCC11664CACD007319A9 /* CNUtils.m */; };
+		D2B2C53816C5170100C2F703 /* generic_route_20130208-112010.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */; };
+		D2B2C53B16C51E1600C2F703 /* garmin_route_20130208-112010.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */; };
+		D2B2C53E16C54B0E00C2F703 /* CNNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */; };
+		D2B400CC169ECF3800F10B8B /* CNGetNearestPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */; };
+		D2B400D0169ED01C00F10B8B /* CNDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B400CF169ED01C00F10B8B /* CNDAO.m */; };
+		D2B400F5169F149000F10B8B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */; };
+		D2B400F8169F1AE300F10B8B /* appData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D2B400F7169F1AE300F10B8B /* appData.sqlite */; };
+		D2B534DB1664F81F00F3713E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B534DA1664F81F00F3713E /* AVFoundation.framework */; };
+		D2B535A8166513A700F3713E /* CNMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B535A7166513A700F3713E /* CNMapViewController.m */; };
+		D2D79F0916B6921B0039A3C2 /* CNPathAction.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D79F0816B6921B0039A3C2 /* CNPathAction.m */; };
+		D2E0FA5D1663A51300483E18 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = D2E0FA591663A51300483E18 /* compass.png */; };
+		D2E0FA5E1663A51300483E18 /* google_maps.png in Resources */ = {isa = PBXBuildFile; fileRef = D2E0FA5A1663A51300483E18 /* google_maps.png */; };
+		D2E0FA5F1663A51300483E18 /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = D2E0FA5B1663A51300483E18 /* locate.png */; };
+		D2E0FA601663A51300483E18 /* near.png in Resources */ = {isa = PBXBuildFile; fileRef = D2E0FA5C1663A51300483E18 /* near.png */; };
+		D2E0FA641663B8B500483E18 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0FA631663B8B500483E18 /* MapKit.framework */; };
+		D2E0FA661663BA2B00483E18 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0FA651663BA2B00483E18 /* CoreLocation.framework */; };
+		D2E0FA6A1663BD8800483E18 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0FA671663BD8800483E18 /* AudioToolbox.framework */; };
+		D2E0FA6C1663BD8800483E18 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E0FA691663BD8800483E18 /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D218A51716C830AB002A860B /* OpenEars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEars.framework; sourceTree = "<group>"; };
+		D21E60BD168336D0004F1C9E /* CNOpenEars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNOpenEars.h; path = ../CNOpenEars.h; sourceTree = "<group>"; };
+		D21E60BE168336D0004F1C9E /* CNOpenEars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNOpenEars.m; path = ../CNOpenEars.m; sourceTree = "<group>"; };
+		D22AAEE416B9278000576016 /* UtilitiesGeo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UtilitiesGeo.c; sourceTree = "<group>"; };
+		D22AAEE716B927BC00576016 /* UtilitiesGeo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilitiesGeo.h; sourceTree = "<group>"; };
+		D22D95BE1677B6ED00EE8523 /* MapBox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapBox.framework; sourceTree = "<group>"; };
+		D22D95C01677B70E00EE8523 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D22D95C21677B71D00EE8523 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D22D95C41677B72A00EE8523 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		D22D95C81677B7A600EE8523 /* MapBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MapBox.bundle; path = ../../../Downloads/MapBox.framework/Versions/A/Resources/MapBox.bundle; sourceTree = "<group>"; };
 		D22E398016639F2B007D174B /* Campus Navigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Campus Navigator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22E398416639F2B007D174B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D22E398616639F2B007D174B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -29,9 +97,80 @@
 		D22E399216639F2B007D174B /* Campus Navigator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Campus Navigator-Prefix.pch"; sourceTree = "<group>"; };
 		D22E399316639F2B007D174B /* CNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNAppDelegate.h; sourceTree = "<group>"; };
 		D22E399416639F2B007D174B /* CNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNAppDelegate.m; sourceTree = "<group>"; };
-		D22E399616639F2B007D174B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D22E399816639F2B007D174B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		D22E399A16639F2B007D174B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D22E39A116639F50007D174B /* CNRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRootViewController.h; sourceTree = "<group>"; };
+		D22E39A216639F50007D174B /* CNRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRootViewController.m; sourceTree = "<group>"; };
+		D234AB6B16835C950011D563 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
+		D234AB6D16835C950011D563 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
+		D234AB6E16835C950011D563 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
+		D234AB6F16835C950011D563 /* means */ = {isa = PBXFileReference; lastKnownFileType = file; path = means; sourceTree = "<group>"; };
+		D234AB7016835C950011D563 /* noisedict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = noisedict; sourceTree = "<group>"; };
+		D234AB7116835C950011D563 /* sendump */ = {isa = PBXFileReference; lastKnownFileType = file; path = sendump; sourceTree = "<group>"; };
+		D234AB7216835C950011D563 /* transition_matrices */ = {isa = PBXFileReference; lastKnownFileType = file; path = transition_matrices; sourceTree = "<group>"; };
+		D234AB7316835C950011D563 /* variances */ = {isa = PBXFileReference; lastKnownFileType = file; path = variances; sourceTree = "<group>"; };
+		D234AB7516835C950011D563 /* OpenEars1.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.dic; sourceTree = "<group>"; };
+		D234AB7616835C950011D563 /* OpenEars1.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.gram; sourceTree = "<group>"; };
+		D234AB7716835C950011D563 /* OpenEars1.languagemodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars1.languagemodel; sourceTree = "<group>"; };
+		D234AB7816835C950011D563 /* OpenEars2.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEars2.gram; sourceTree = "<group>"; };
+		D234AB7916835C950011D563 /* OpenEarsCorpus.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OpenEarsCorpus.txt; sourceTree = "<group>"; };
+		D234AB7A16835C950011D563 /* Slt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Slt.framework; sourceTree = "<group>"; };
+		D234AB8A16836F4B0011D563 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
+		D234AB8B16836F4B0011D563 /* marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marker@2x.png"; sourceTree = "<group>"; };
+		D234AB8E1683A3DB0011D563 /* CNAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAnnotationView.h; sourceTree = "<group>"; };
+		D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAnnotationView.m; sourceTree = "<group>"; };
+		D234AB911683A6AB0011D563 /* CNCustomAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCustomAnnotation.h; sourceTree = "<group>"; };
+		D23D50B016CFC4E400260794 /* CNLanguageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNLanguageModel.h; sourceTree = "<group>"; };
+		D23D50B116CFC4E400260794 /* CNLanguageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNLanguageModel.m; sourceTree = "<group>"; };
+		D245A41916A36DB70090A9A8 /* CNGeneralTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNGeneralTree.h; sourceTree = "<group>"; };
+		D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNGeneralTree.m; sourceTree = "<group>"; };
+		D245A41C16A370300090A9A8 /* CNNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNode.h; sourceTree = "<group>"; };
+		D245A41D16A370300090A9A8 /* CNNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNode.m; sourceTree = "<group>"; };
+		D24F70041694BCF6002E7B34 /* volcab.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = volcab.gram; sourceTree = "<group>"; };
+		D25A10F816833D3C00640BD9 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
+		D268E1821697560F00A67D49 /* FinalUCCMap.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = FinalUCCMap.mbtiles; sourceTree = "<group>"; };
+		D277B3F816E61FC0001CB603 /* StartBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StartBeep.mp3; sourceTree = "<group>"; };
+		D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FinBeep2.mp3; sourceTree = "<group>"; };
+		D277FBDD169ECC8B00A89C8B /* CNPathFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPathFinder.h; sourceTree = "<group>"; };
+		D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPathFinder.m; sourceTree = "<group>"; };
+		D27D23DE16A41A7D00F0A88E /* TreeList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TreeList.c; sourceTree = "<group>"; };
+		D27E1E1516E4A308003A126C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D27E1E1616E4A308003A126C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D295114616B2A41E00A9C098 /* PESGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraph.h; sourceTree = "<group>"; };
+		D295114716B2A41E00A9C098 /* PESGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraph.m; sourceTree = "<group>"; };
+		D295114816B2A41E00A9C098 /* PESGraphNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphNode.h; sourceTree = "<group>"; };
+		D295114916B2A41E00A9C098 /* PESGraphNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphNode.m; sourceTree = "<group>"; };
+		D295114A16B2A41E00A9C098 /* PESGraphEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphEdge.h; sourceTree = "<group>"; };
+		D295114B16B2A41E00A9C098 /* PESGraphEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphEdge.m; sourceTree = "<group>"; };
+		D295114C16B2A41E00A9C098 /* PESGraphRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphRoute.h; sourceTree = "<group>"; };
+		D295114D16B2A41E00A9C098 /* PESGraphRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphRoute.m; sourceTree = "<group>"; };
+		D295114E16B2A41E00A9C098 /* PESGraphRouteStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraphRouteStep.h; sourceTree = "<group>"; };
+		D295114F16B2A41E00A9C098 /* PESGraphRouteStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphRouteStep.m; sourceTree = "<group>"; };
+		D298BCC01664CACD007319A9 /* CNUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNUtils.h; sourceTree = "<group>"; };
+		D298BCC11664CACD007319A9 /* CNUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNUtils.m; sourceTree = "<group>"; };
+		D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "generic_route_20130208-112010.gpx"; sourceTree = "<group>"; };
+		D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "garmin_route_20130208-112010.gpx"; sourceTree = "<group>"; };
+		D2B2C53C16C54B0E00C2F703 /* CNNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNavigator.h; sourceTree = "<group>"; };
+		D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNavigator.m; sourceTree = "<group>"; };
+		D2B400CA169ECF3800F10B8B /* CNGetNearestPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNGetNearestPath.h; sourceTree = "<group>"; };
+		D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNGetNearestPath.m; sourceTree = "<group>"; };
+		D2B400CE169ED01C00F10B8B /* CNDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNDAO.h; sourceTree = "<group>"; };
+		D2B400CF169ED01C00F10B8B /* CNDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNDAO.m; path = "/Applications/Xcode.app/Contents/Developer/../../../../Users/RichardToolan/Documents/Developing/Campus Navigator/Campus Navigator/CNDAO.m"; sourceTree = "<absolute>"; };
+		D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		D2B400F7169F1AE300F10B8B /* appData.sqlite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appData.sqlite; sourceTree = "<group>"; };
+		D2B534DA1664F81F00F3713E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D2B535A6166513A700F3713E /* CNMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNMapViewController.h; sourceTree = "<group>"; };
+		D2B535A7166513A700F3713E /* CNMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNMapViewController.m; sourceTree = "<group>"; };
+		D2D79F0716B6921B0039A3C2 /* CNPathAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPathAction.h; sourceTree = "<group>"; };
+		D2D79F0816B6921B0039A3C2 /* CNPathAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPathAction.m; sourceTree = "<group>"; };
+		D2E0FA591663A51300483E18 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
+		D2E0FA5A1663A51300483E18 /* google_maps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_maps.png; sourceTree = "<group>"; };
+		D2E0FA5B1663A51300483E18 /* locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locate.png; sourceTree = "<group>"; };
+		D2E0FA5C1663A51300483E18 /* near.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = near.png; sourceTree = "<group>"; };
+		D2E0FA621663A5DF00483E18 /* CNCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCommon.h; sourceTree = "<group>"; };
+		D2E0FA631663B8B500483E18 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D2E0FA651663BA2B00483E18 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D2E0FA671663BD8800483E18 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D2E0FA681663BD8800483E18 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		D2E0FA691663BD8800483E18 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,9 +178,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B400F5169F149000F10B8B /* libsqlite3.0.dylib in Frameworks */,
+				D22D95C51677B72A00EE8523 /* libsqlite3.dylib in Frameworks */,
+				D22D95C31677B71D00EE8523 /* libz.dylib in Frameworks */,
+				D22D95C11677B70E00EE8523 /* QuartzCore.framework in Frameworks */,
+				D2B534DB1664F81F00F3713E /* AVFoundation.framework in Frameworks */,
+				D2E0FA6A1663BD8800483E18 /* AudioToolbox.framework in Frameworks */,
+				D2E0FA6C1663BD8800483E18 /* CoreAudio.framework in Frameworks */,
+				D2E0FA661663BA2B00483E18 /* CoreLocation.framework in Frameworks */,
+				D2E0FA641663B8B500483E18 /* MapKit.framework in Frameworks */,
 				D22E398516639F2B007D174B /* UIKit.framework in Frameworks */,
 				D22E398716639F2B007D174B /* Foundation.framework in Frameworks */,
 				D22E398916639F2B007D174B /* CoreGraphics.framework in Frameworks */,
+				D22D95BF1677B6ED00EE8523 /* MapBox.framework in Frameworks */,
+				D234AB8916835C950011D563 /* Slt.framework in Frameworks */,
+				D218A51816C830AB002A860B /* OpenEars.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +202,21 @@
 		D22E397516639F2B007D174B = {
 			isa = PBXGroup;
 			children = (
+				D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */,
+				D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */,
+				D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */,
+				D234AB6A16835C950011D563 /* Framework */,
+				D22D95C81677B7A600EE8523 /* MapBox.bundle */,
+				D22D95C41677B72A00EE8523 /* libsqlite3.dylib */,
+				D22D95C21677B71D00EE8523 /* libz.dylib */,
+				D22D95C01677B70E00EE8523 /* QuartzCore.framework */,
+				D22D95BE1677B6ED00EE8523 /* MapBox.framework */,
+				D2B534DA1664F81F00F3713E /* AVFoundation.framework */,
+				D2E0FA671663BD8800483E18 /* AudioToolbox.framework */,
+				D2E0FA681663BD8800483E18 /* AudioUnit.framework */,
+				D2E0FA691663BD8800483E18 /* CoreAudio.framework */,
+				D2E0FA651663BA2B00483E18 /* CoreLocation.framework */,
+				D2E0FA631663B8B500483E18 /* MapKit.framework */,
 				D22E398A16639F2B007D174B /* Campus Navigator */,
 				D22E398316639F2B007D174B /* Frameworks */,
 				D22E398116639F2B007D174B /* Products */,
@@ -78,9 +244,39 @@
 		D22E398A16639F2B007D174B /* Campus Navigator */ = {
 			isa = PBXGroup;
 			children = (
+				D295115616B2A42500A9C098 /* PESGraph */,
+				D2B2C53C16C54B0E00C2F703 /* CNNavigator.h */,
+				D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */,
+				D21E60BD168336D0004F1C9E /* CNOpenEars.h */,
+				D21E60BE168336D0004F1C9E /* CNOpenEars.m */,
 				D22E399316639F2B007D174B /* CNAppDelegate.h */,
 				D22E399416639F2B007D174B /* CNAppDelegate.m */,
+				D22E39A116639F50007D174B /* CNRootViewController.h */,
+				D22E39A216639F50007D174B /* CNRootViewController.m */,
+				D2E0FA621663A5DF00483E18 /* CNCommon.h */,
+				D298BCC01664CACD007319A9 /* CNUtils.h */,
+				D298BCC11664CACD007319A9 /* CNUtils.m */,
+				D2B535A6166513A700F3713E /* CNMapViewController.h */,
+				D2B535A7166513A700F3713E /* CNMapViewController.m */,
+				D234AB8E1683A3DB0011D563 /* CNAnnotationView.h */,
+				D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */,
+				D234AB911683A6AB0011D563 /* CNCustomAnnotation.h */,
+				D277FBDD169ECC8B00A89C8B /* CNPathFinder.h */,
+				D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */,
+				D2B400CA169ECF3800F10B8B /* CNGetNearestPath.h */,
+				D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */,
+				D2B400CE169ED01C00F10B8B /* CNDAO.h */,
+				D2B400CF169ED01C00F10B8B /* CNDAO.m */,
 				D22E398B16639F2B007D174B /* Supporting Files */,
+				D245A41916A36DB70090A9A8 /* CNGeneralTree.h */,
+				D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */,
+				D245A41C16A370300090A9A8 /* CNNode.h */,
+				D245A41D16A370300090A9A8 /* CNNode.m */,
+				D27D23DE16A41A7D00F0A88E /* TreeList.c */,
+				D2D79F0716B6921B0039A3C2 /* CNPathAction.h */,
+				D2D79F0816B6921B0039A3C2 /* CNPathAction.m */,
+				D23D50B016CFC4E400260794 /* CNLanguageModel.h */,
+				D23D50B116CFC4E400260794 /* CNLanguageModel.m */,
 			);
 			path = "Campus Navigator";
 			sourceTree = "<group>";
@@ -88,15 +284,75 @@
 		D22E398B16639F2B007D174B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D277B3F816E61FC0001CB603 /* StartBeep.mp3 */,
+				D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */,
+				D27E1E1516E4A308003A126C /* Default-568h@2x.png */,
+				D27E1E1616E4A308003A126C /* Default@2x.png */,
+				D2B400F7169F1AE300F10B8B /* appData.sqlite */,
+				D24F70041694BCF6002E7B34 /* volcab.gram */,
+				D25A10F816833D3C00640BD9 /* cmu07a.dic */,
+				D234AB8A16836F4B0011D563 /* marker.png */,
+				D234AB8B16836F4B0011D563 /* marker@2x.png */,
+				D268E1821697560F00A67D49 /* FinalUCCMap.mbtiles */,
+				D2E0FA591663A51300483E18 /* compass.png */,
+				D2E0FA5A1663A51300483E18 /* google_maps.png */,
+				D2E0FA5B1663A51300483E18 /* locate.png */,
+				D2E0FA5C1663A51300483E18 /* near.png */,
 				D22E398C16639F2B007D174B /* Campus Navigator-Info.plist */,
 				D22E398D16639F2B007D174B /* InfoPlist.strings */,
 				D22E399016639F2B007D174B /* main.m */,
 				D22E399216639F2B007D174B /* Campus Navigator-Prefix.pch */,
-				D22E399616639F2B007D174B /* Default.png */,
-				D22E399816639F2B007D174B /* Default@2x.png */,
-				D22E399A16639F2B007D174B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D234AB6A16835C950011D563 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				D218A51716C830AB002A860B /* OpenEars.framework */,
+				D234AB6B16835C950011D563 /* cmu07a.dic */,
+				D234AB6C16835C950011D563 /* hub4wsj_sc_8k */,
+				D234AB7516835C950011D563 /* OpenEars1.dic */,
+				D234AB7616835C950011D563 /* OpenEars1.gram */,
+				D234AB7716835C950011D563 /* OpenEars1.languagemodel */,
+				D234AB7816835C950011D563 /* OpenEars2.gram */,
+				D234AB7916835C950011D563 /* OpenEarsCorpus.txt */,
+				D234AB7A16835C950011D563 /* Slt.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		D234AB6C16835C950011D563 /* hub4wsj_sc_8k */ = {
+			isa = PBXGroup;
+			children = (
+				D234AB6D16835C950011D563 /* feat.params */,
+				D234AB6E16835C950011D563 /* mdef */,
+				D234AB6F16835C950011D563 /* means */,
+				D234AB7016835C950011D563 /* noisedict */,
+				D234AB7116835C950011D563 /* sendump */,
+				D234AB7216835C950011D563 /* transition_matrices */,
+				D234AB7316835C950011D563 /* variances */,
+			);
+			path = hub4wsj_sc_8k;
+			sourceTree = "<group>";
+		};
+		D295115616B2A42500A9C098 /* PESGraph */ = {
+			isa = PBXGroup;
+			children = (
+				D295114616B2A41E00A9C098 /* PESGraph.h */,
+				D295114716B2A41E00A9C098 /* PESGraph.m */,
+				D295114816B2A41E00A9C098 /* PESGraphNode.h */,
+				D295114916B2A41E00A9C098 /* PESGraphNode.m */,
+				D295114A16B2A41E00A9C098 /* PESGraphEdge.h */,
+				D295114B16B2A41E00A9C098 /* PESGraphEdge.m */,
+				D295114C16B2A41E00A9C098 /* PESGraphRoute.h */,
+				D295114D16B2A41E00A9C098 /* PESGraphRoute.m */,
+				D295114E16B2A41E00A9C098 /* PESGraphRouteStep.h */,
+				D295114F16B2A41E00A9C098 /* PESGraphRouteStep.m */,
+				D22AAEE416B9278000576016 /* UtilitiesGeo.c */,
+				D22AAEE716B927BC00576016 /* UtilitiesGeo.h */,
+			);
+			name = PESGraph;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,9 +408,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22E398F16639F2B007D174B /* InfoPlist.strings in Resources */,
-				D22E399716639F2B007D174B /* Default.png in Resources */,
-				D22E399916639F2B007D174B /* Default@2x.png in Resources */,
-				D22E399B16639F2B007D174B /* Default-568h@2x.png in Resources */,
+				D2E0FA5D1663A51300483E18 /* compass.png in Resources */,
+				D2E0FA5E1663A51300483E18 /* google_maps.png in Resources */,
+				D2E0FA5F1663A51300483E18 /* locate.png in Resources */,
+				D2E0FA601663A51300483E18 /* near.png in Resources */,
+				D22D95C91677B7A600EE8523 /* MapBox.bundle in Resources */,
+				D25A10F916833D3C00640BD9 /* cmu07a.dic in Resources */,
+				D234AB7C16835C950011D563 /* feat.params in Resources */,
+				D234AB7D16835C950011D563 /* mdef in Resources */,
+				D234AB7E16835C950011D563 /* means in Resources */,
+				D234AB7F16835C950011D563 /* noisedict in Resources */,
+				D234AB8016835C950011D563 /* sendump in Resources */,
+				D234AB8116835C950011D563 /* transition_matrices in Resources */,
+				D234AB8216835C950011D563 /* variances in Resources */,
+				D234AB8416835C950011D563 /* OpenEars1.dic in Resources */,
+				D234AB8516835C950011D563 /* OpenEars1.gram in Resources */,
+				D234AB8616835C950011D563 /* OpenEars1.languagemodel in Resources */,
+				D234AB8716835C950011D563 /* OpenEars2.gram in Resources */,
+				D234AB8816835C950011D563 /* OpenEarsCorpus.txt in Resources */,
+				D234AB8C16836F4B0011D563 /* marker.png in Resources */,
+				D234AB8D16836F4B0011D563 /* marker@2x.png in Resources */,
+				D24F70051694BCF6002E7B34 /* volcab.gram in Resources */,
+				D268E1831697560F00A67D49 /* FinalUCCMap.mbtiles in Resources */,
+				D2B400F8169F1AE300F10B8B /* appData.sqlite in Resources */,
+				D2B2C53816C5170100C2F703 /* generic_route_20130208-112010.gpx in Resources */,
+				D2B2C53B16C51E1600C2F703 /* garmin_route_20130208-112010.gpx in Resources */,
+				D27E1E1716E4A308003A126C /* Default-568h@2x.png in Resources */,
+				D27E1E1816E4A308003A126C /* Default@2x.png in Resources */,
+				D277B3FA16E61FC0001CB603 /* StartBeep.mp3 in Resources */,
+				D277B3FB16E61FC0001CB603 /* FinBeep2.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +449,26 @@
 			files = (
 				D22E399116639F2B007D174B /* main.m in Sources */,
 				D22E399516639F2B007D174B /* CNAppDelegate.m in Sources */,
+				D22E39A316639F50007D174B /* CNRootViewController.m in Sources */,
+				D298BCC21664CACD007319A9 /* CNUtils.m in Sources */,
+				D2B535A8166513A700F3713E /* CNMapViewController.m in Sources */,
+				D21E60BF168336D0004F1C9E /* CNOpenEars.m in Sources */,
+				D234AB901683A3DC0011D563 /* CNAnnotationView.m in Sources */,
+				D277FBDF169ECC8B00A89C8B /* CNPathFinder.m in Sources */,
+				D2B400CC169ECF3800F10B8B /* CNGetNearestPath.m in Sources */,
+				D2B400D0169ED01C00F10B8B /* CNDAO.m in Sources */,
+				D245A41B16A36DB70090A9A8 /* CNGeneralTree.m in Sources */,
+				D245A41E16A370300090A9A8 /* CNNode.m in Sources */,
+				D27D23DF16A41A7D00F0A88E /* TreeList.c in Sources */,
+				D295115016B2A41E00A9C098 /* PESGraph.m in Sources */,
+				D295115116B2A41E00A9C098 /* PESGraphNode.m in Sources */,
+				D295115216B2A41E00A9C098 /* PESGraphEdge.m in Sources */,
+				D295115316B2A41E00A9C098 /* PESGraphRoute.m in Sources */,
+				D295115416B2A41E00A9C098 /* PESGraphRouteStep.m in Sources */,
+				D2D79F0916B6921B0039A3C2 /* CNPathAction.m in Sources */,
+				D22AAEE516B9278000576016 /* UtilitiesGeo.c in Sources */,
+				D2B2C53E16C54B0E00C2F703 /* CNNavigator.m in Sources */,
+				D23D50B216CFC4E400260794 /* CNLanguageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,10 +537,27 @@
 		D22E399F16639F2B007D174B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Richard Toolan (T4H23YM3AZ)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Framework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Campus Navigator/Campus Navigator-Prefix.pch";
 				INFOPLIST_FILE = "Campus Navigator/Campus Navigator-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MapBox-iOS-SDK/MapView/Map/GRMustache/lib\"",
+					"\"$(SRCROOT)/MapBox-iOS-SDK/Proj4\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "781D9F10-6535-407E-9F33-D306621AD6F6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -246,9 +565,24 @@
 		D22E39A016639F2B007D174B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Framework\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Campus Navigator/Campus Navigator-Prefix.pch";
 				INFOPLIST_FILE = "Campus Navigator/Campus Navigator-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/MapBox-iOS-SDK/MapView/Map/GRMustache/lib\"",
+					"\"$(SRCROOT)/MapBox-iOS-SDK/Proj4\"",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-v",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -273,6 +607,7 @@
 				D22E39A016639F2B007D174B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,8 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+@class CNDAO, PESGraph;
 @interface CNPathFinder : NSObject{
-    NSMutableArray *visitedPaths;
+    CNDAO *dao;
+    PESGraph *graph;
+    PESGraph *secondGraph;
+    CLLocationCoordinate2D prevUserLoc;
+    NSNumber *buildingNearPointID;
 }
-
+-(NSArray *)getNodesForPathFrom:(int)org toDest:(int)dest andUserLoc:(CLLocationCoordinate2D)userLoc;
+-(NSDictionary *)getNearestPointForLat:(double)lat AndLon:(double)lon;
+-(NSArray *)generateDirectionObjects:(NSArray *)paths;
+-(NSArray *)compareAndUpdateCoordinates:(NSArray*)points;
+-(NSDictionary *)getNearestBuidingForString:(NSString *)building;
 @end

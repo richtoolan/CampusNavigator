@@ -7,7 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface CNLanguageModel : NSObject
+@class CNOpenEars;
+@interface CNLanguageModel : NSObject{
+    int level;
+    int notificationCount;
+    int currentPathIndex;
+    CLLocationDistance previousDistance;
+    NSString *previousTurnString;
+    CNOpenEars *openEars;
+    BOOL warnedAboutTurn;
+    NSDate *speakTimer;
+    
+}
+@property(nonatomic, retain) CNOpenEars *openEars;
 
+-(id)initWithLevel:(int)lvl andOE:(CNOpenEars *)OE andIndex:(int)index;
+-(void)updateToUserLoc:(CLLocationDistance)distance andTurnString:(NSString *)turn andIndex:(int)index;
+-(void)reset;
 @end

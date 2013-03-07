@@ -10,6 +10,9 @@
 #import <MapBox/MapBox.h>
 @interface CNMapViewController : UIView <RMMapViewDelegate>{
     RMMapView *_mapView;
+    NSDictionary *pathsInView;
 }
 -(id)initWithFrame:(CGRect)frame;
+-(void)addAnnotationForPoints:(NSArray *)points;
+-(void)removePathAnnotation;
 @end

@@ -14,27 +14,35 @@
 #import "CNUtils.h"
 #import "CNMapViewController.h"
 #import <MapBox/MapBox.h>
-#import "CNDAO.h"
 @interface CNRootViewController ()
 
 @end
 
 @implementation CNRootViewController
+BOOL debug = YES;
 @synthesize openEars;
+@synthesize navigator;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.openEars = [[[CNOpenEars alloc] init] retain];
         self.openEars.delegate = (CNOpenEarsDelegate *)self;
-        CNDAO *dao = [[CNDAO alloc] init];
-        points = [[dao returnAllPoints] retain];
-        //NSLog(@"Points are %@",[dao returnAllPoints]);
-        for(NSDictionary *point in points){
-           CLLocation *loc = [point objectForKey:@"pointCoordinate"];
-            NSLog(@"%f",[loc getDistanceFrom:[[CLLocation alloc] initWithLatitude:51.893464 longitude:-8.492174]]);
-            
-        }
+        //pathFinder = [[[CNPathFinder alloc] init] retain];
+        self.navigator = [[CNNavigator alloc] init];
+        self.navigator.delegate = (CNNavigatorDelegate *)self;
+        self.navigator.openears = self.openEars;
+        UITapGestureRecognizer *tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(trebleTap)];
+        tapRecog.numberOfTapsRequired = 3;
+        [self.view addGestureRecognizer:tapRecog];
+        [tapRecog release];
+        //points = [[dao getNearestPointForLat:51.893677 AndLon:-8.49219] retain];
+        //NSLog(@"Point test: %@",[dao getNearestPointForLat:51.89367322618882 AndLon:-8.493998441763681]);
+        ////NSLog(@"Points are %@",points);
+        //NSMutableArray *arr = [dao testPathID:1:nil dest:12];
+        //[dao testPathID:5];
+        //NSLog(@"%@", arr);
+        
     }
     return self;
 }
@@ -62,26 +70,47 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+-(void)trebleTap
 {
-    if (motion == UIEventSubtypeMotionShake)
-    {
+    
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [openEars listen];
+        if([self.navigator isNavigating]){
+            if(debug){
+                [self.navigator stopNav];
+                [mapView removePathAnnotation];
+            }else{
+                [self.openEars stopListen];
+                [self.navigator stopNav];
+                [mapView removePathAnnotation];
+            }
+        }else{
+            if (debug) {
+                [self.navigator beginNavigationToLocation:@"Western Gateway Building"];
+            }else{
+                if(self.openEars.isListening){
+                
+                    [self.openEars speakSentence:@"Voice control stopped."];
+                    [self.openEars stopListen];
+                }else{
+                    [self.openEars listen];
+                }
+            }
+            //[self.navigator beginNavigationToLocation:@"Western Gateway Building"];
+        }
+        //[openEars listen];
         
         //[self test];
                 //AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
-        [CNUtils displayAlertWithTitle:@"Shaken" andText:@"Not stired" andButtonText:@"OK"];
+        //[CNUtils displayAlertWithTitle:@"Detected Shake" andText:@"Wait for prompt before speaking." andButtonText:@"OK"];
        
-    }
+    
 }
 - (void)setUpView{
     CGFloat buttonSize = 50.0f;
     CGRect parentFrame = self.view.frame;
     UIButton *compassButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [compassButton setBackgroundColor:BUTTON_COLOUR];
-    [compassButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [compassButton setImage:[UIImage imageNamed:@"compass.png"] forState:UIControlStateNormal];
     [compassButton setFrame:CGRectMake(BUTTON_GRID_SIZE , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     compassButton.tag = 0;
@@ -89,7 +118,6 @@
     
     UIButton *locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [locateButton setBackgroundColor:BUTTON_COLOUR];
-    [locateButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [locateButton setImage:[UIImage imageNamed:@"locate.png"] forState:UIControlStateNormal];
     [locateButton setFrame:CGRectMake(parentFrame.size.width/2 -( BUTTON_GRID_SIZE/2 + buttonSize) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     locateButton.tag = 1;
@@ -97,7 +125,6 @@
     
     UIButton *nearButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [nearButton setBackgroundColor:BUTTON_COLOUR];
-    [nearButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [nearButton setImage:[UIImage imageNamed:@"near.png"] forState:UIControlStateNormal];
     [nearButton setFrame:CGRectMake(parentFrame.size.width/2 +( BUTTON_GRID_SIZE/2 ) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     nearButton.tag = 2;
@@ -105,7 +132,6 @@
     
     UIButton *googleMapsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [googleMapsButton setBackgroundColor:BUTTON_COLOUR];
-    [googleMapsButton addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [googleMapsButton setImage:[UIImage imageNamed:@"google_maps.png"] forState:UIControlStateNormal];
     [googleMapsButton setFrame:CGRectMake(parentFrame.size.width -( BUTTON_GRID_SIZE + buttonSize) , parentFrame.size.height -( BUTTON_GRID_SIZE + buttonSize), buttonSize, buttonSize  )];
     googleMapsButton.tag = 3;
@@ -161,11 +187,14 @@
     
     */
     
-    CNMapViewController *mapView = [[CNMapViewController alloc] initWithFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
+    mapView = [[CNMapViewController alloc] initWithFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
     //mapView.alpha = 0.8;//
-
+    //NSLog(@"%@", [pathFinder getNodesForPathFrom:33 toDest:36]);
+    //[mapView ]
     [self.view addSubview:mapView];
-    [mapView release];
+    //[dao pathFrom:@"30" to:@"12"];
+
+    //[mapView release];
     /*
     MKMapView *map = [[MKMapView alloc] init];
     [map setFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
@@ -178,8 +207,8 @@
     view.image = [UIImage imageNamed:@"google_maps.png"];
     [map addAnnotation:anno];*/
     
-    CNUtils *utils = [[CNUtils alloc] init];
-    [utils isHeadsetPluggedIn];
+   // CNUtils *utils = [[CNUtils alloc] init];
+    //[utils isHeadsetPluggedIn];
     /*
     if([CNUtils isHeadsetPluggedIn]){
         [CNUtils displayAlertWithTitle:@"HEADPHONES DETECTED" andText:@"Headphones are plugged in" andButtonText:@"OK"];
@@ -188,8 +217,8 @@
     }*/
     
     
-    [utils release];
-    
+    //[utils release];
+    //[self.navigator beginNavigationToLocation:@"WGB"];
 }
 
 /*-(void) test{
@@ -206,14 +235,38 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)setPathObject:(NSArray *)pointsArray{
+    
+    points = [pointsArray retain];
+    
+    
+    //badly set map view
+    for(NSArray *path in points){
+        if ([path count] >= 1) {
+            
+            
+            [mapView addAnnotationForPoints:path];
+        }
+    }
+    
+}
 
 -(void)giveStringLocation:(NSString *)text{
     NSLog(@"String is %@", text);
+    if(![self.navigator isNavigating]){
+    [self.navigator beginNavigationToLocation:text];
+    }else if([text isEqualToString:@"STOP"]){
+        
+        [self.navigator stopNav];
+        [self.openEars stopListen];
+        [self.openEars speakSentence:@"Navigation Stopped, shake device to start again."];
+    }
 }
+
 -(void)dealloc{
     
     self.openEars = nil;
+    [points release];
     [super dealloc];
 }
 @end

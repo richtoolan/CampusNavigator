@@ -13,7 +13,7 @@
 @synthesize identifier;
 @synthesize title;
 @synthesize additionalData;
-
+@synthesize coordinate;
 
 + (PESGraphNode *)nodeWithIdentifier:(NSString *)anIdentifier {
 
@@ -29,6 +29,7 @@
     [identifier release];
     [title release];
     [additionalData release];
+    [coordinate release];
     [super dealloc];
 }
 

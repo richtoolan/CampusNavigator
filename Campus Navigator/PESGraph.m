@@ -223,7 +223,24 @@
             } else {
 
                 // Otherwise, remove the node thats the closest to the source and continue the search by looking
-                // for the next closest item to the orgin. 
+                // for the next closest item to the orgin.
+                for (PESGraphNode *neighboringNode in [self neighborsOfNodeWithIdentifier:identifierOfSmallestDist]) {
+                    if([neighboringNode.identifier isEqualToString:endNode.identifier]){
+                        [previousNodeInOptimalPath setValue:nodeMostRecentlyExamined forKey:neighboringNode.identifier];
+                        //[unexaminedNodes removeAllObjects];
+                        currentlyExaminedIdentifier = endNode.identifier;
+                        break;
+                        
+                    }else if([neighboringNode.identifier isEqualToString:[endNode.identifier stringByReplacingOccurrencesOfString:@"X" withString:@"Y"]]){
+                        [previousNodeInOptimalPath setValue:nodeMostRecentlyExamined forKey:neighboringNode.identifier];
+                        currentlyExaminedIdentifier = [endNode.identifier stringByReplacingOccurrencesOfString:@"X" withString:@"Y"];
+                        endNode = [self nodeInGraphWithIdentifier:[endNode.identifier stringByReplacingOccurrencesOfString:@"X" withString:@"Y"]];
+                        //[unexaminedNodes removeAllObjects];
+                        break;
+                    }
+                }if(currentlyExaminedIdentifier != nil){
+                    break;
+                }
                 [unexaminedNodes removeObjectForKey:identifierOfSmallestDist];
                 
                 // Now, iterate over all the nodes that touch the one closest to the graph
@@ -260,7 +277,7 @@
     // If the key of the destination node is equal to the node we most recently found to be in the shortest path 
     // between the origin and the destination, we're in situation 2.  Otherwise, we're in situation 1 and we
     // should just return nil and be done with it
-    if ( currentlyExaminedIdentifier == nil || ! [currentlyExaminedIdentifier isEqualToString:endNode.identifier]) {
+    if ( currentlyExaminedIdentifier == nil ||  ! [currentlyExaminedIdentifier isEqualToString:endNode.identifier]   ) {
         
         return nil;
         

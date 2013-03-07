@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface CNPathAction : NSObject
-
+@class CLLocation;
+@interface CNPathAction : NSObject{
+    
+}
+@property (nonatomic, retain)NSString *fromPath;
+@property (nonatomic, retain)NSString *toPath;
+@property (nonatomic) double turnAngle;
+@property (nonatomic, retain) NSString *turnString;
+@property (nonatomic, retain) CLLocation *turnLocation;
+-(id)initWithFromPath:(NSString *)from toPath:(NSString *)to withAngle:(double)angle andLocation:(CLLocation*)turnLoc;
+-(id)initWithFromPathDestandLocation:(CLLocation*)turnLoc;
+-(NSString *)info;
 @end

@@ -65,7 +65,7 @@
 - (void)dealloc {
     
     [weight release];
-    [name release];
+    //[name release];
     [super dealloc];
 }
 

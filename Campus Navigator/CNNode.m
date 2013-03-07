@@ -7,7 +7,7 @@
 //
 
 #import "CNNode.h"
-
+#import <Foundation/Foundation.h>
 @implementation CNNode
-
+//NSTree
 @end
