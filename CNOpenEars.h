@@ -19,8 +19,9 @@
 	NSString *pathToDynamicallyGeneratedDictionary;
     NSMutableArray *queue;
     AVAudioPlayer *player;
-  
-    
+    BOOL spelling;
+    BOOL spellingWord;
+    BOOL voiceRecogActive;
 	
 	// Our NSTimer that will help us read and display the input and output levels without locking the UI
     Slt *slt;

@@ -74,12 +74,14 @@
     queue = [[[NSMutableArray alloc] init] retain];
     confirmNav = NO;
     [self speakSentence:@"Setting up voice."];
+    //[self.pocketsphinxController en]
     NSLog(@"SET UP CALLED");
     if(! self.pathToDynamicallyGeneratedDictionary){
-    //player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-        
-    LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
-    NSArray *languageArray = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects: // All capital letters.
+        //player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+        spelling = YES;
+        voiceRecogActive = NO;
+        LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
+        NSArray *languageArray = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects: // All capital letters.
                                                              @"ORB",
                                                              @"O",
                                                              @"RAHILY",
@@ -102,13 +104,14 @@
                                                              @"STOP",
                                                              @"YES",
                                                              @"NO",
+                                                             @"SAVE",
                                                              nil]];
-    NSString *name = @"LocationsNames";
+        NSString *name = @"LocationsNames";
         
-    NSError *err = [lmGenerator generateLanguageModelFromArray:languageArray withFilesNamed:name];
+        NSError *err = [lmGenerator generateLanguageModelFromArray:languageArray withFilesNamed:name];
 
         //[languageArray release];
-    NSDictionary *languageGeneratorResults = nil;
+        NSDictionary *languageGeneratorResults = nil;
     
     //[lmGenerator release];
     if([err code] == noErr) {
@@ -127,6 +130,7 @@
 }
 -(void)listen{
     self.isListening = YES;
+    //[self performSelectorOnMainThread]
     [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:YES];
 }
 
@@ -135,7 +139,8 @@
     [self.pocketsphinxController stopListening];
 }
 -(void)suspendRecognition{
-    
+    voiceRecogActive = NO;
+    //[player performSelectorOnMainThread:@selector(play) withObject:nil waitUntilDone:YES];
     [self.pocketsphinxController suspendRecognition];
     
 }
@@ -143,26 +148,15 @@
     if(!self.isListening){
         [self listen];
     }
-    //this is also really really bad but will work for now.
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    if(player != nil) [player release];
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.numberOfLoops = 1; //Infinite
-    player.delegate = self;
-    [player play];
-    //[self.pocketsphinxController resumeRecognition];
+        voiceRecogActive = YES;
+        
+    
 }
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
+   //[self performSelectorOnMainThread:@selector(suspendRecognition) withObject:nil waitUntilDone:YES];
     [self suspendRecognition];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    player = nil;
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.numberOfLoops = 1; //Infinite
     
-    [player play];
     //[hypothesis retain];
     if([hypothesis isEqualToString:@"(null)"]|| [hypothesis length] < 3 ){
         //Theres an error the sentence is either incomplete of we can't recognise what the user is saying
@@ -200,7 +194,16 @@
            [self resumeRecognition];
            //[delegate giveStringLocation:[hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]];
             //[self stopListen];
-       }else{
+       }else if([hypothesis isEqualToString:@"SAVE"] || spellingWord){
+           if ([hypothesis isEqualToString:@"SAVE"]) {
+               spellingWord = YES;
+           }else{
+               spellingWord = NO;
+           }
+           [self dyamicallySwitchDictionary];
+           
+       }
+       else{
            [self speakSentence:@"Sorry I didn't get that."];
            [self resumeRecognition];
        }
@@ -210,7 +213,105 @@
     }
 	NSLog(@"The received hypothesis is %@ with a score of %@ and an ID of %@", hypothesis, recognitionScore, utteranceID);
 }
+-(void)dyamicallySwitchDictionary{
+    if (spelling) {
+        spelling = NO;
+        LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
+        NSArray *languageArray = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects: // All capital letters.
+                                                                 @"A",
+                                                                 @"B",
+                                                                 @"C",
+                                                                 @"D",
+                                                                 @"E",
+                                                                 @"F",
+                                                                 @"G",
+                                                                 @"H",
+                                                                 @"I",
+                                                                 @"J",
+                                                                 @"K",
+                                                                 @"L",
+                                                                 @"M",
+                                                                 @"N",
+                                                                 @"O",
+                                                                 @"P",
+                                                                 @"Q",
+                                                                 @"R",
+                                                                 @"S",
+                                                                 @"T",
+                                                                 @"U",
+                                                                 @"V",
+                                                                 @"W",
+                                                                 @"X",
+                                                                 @"Y",
+                                                                 @"Z",
+                                                                 @"SPACE",
+                                                            
+                                                                 nil]];
+        NSString *name = @"SpellingChars";
+        
+        NSError *err = [lmGenerator generateLanguageModelFromArray:languageArray withFilesNamed:name];
+        
+        //[languageArray release];
+        NSDictionary *languageGeneratorResults = nil;
+        
+        //[lmGenerator release];
+        if([err code] == noErr) {
+            
+            languageGeneratorResults = [err userInfo];
+            
+            //self.pathToDynamicallyGeneratedGrammar = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"volcab.gram"];
+            self.pathToDynamicallyGeneratedGrammar = [languageGeneratorResults objectForKey:@"LMPath"];
+            self.pathToDynamicallyGeneratedDictionary = [languageGeneratorResults objectForKey:@"DictionaryPath"];
+        }
 
+    [self performSelectorOnMainThread:@selector(updateDict) withObject:nil waitUntilDone:YES];
+    [self resumeRecognition];
+    }else{
+        spelling = YES;
+        LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
+        NSArray *languageArray = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects: // All capital letters.
+                                                                 @"ORB",
+                                                                 @"O",
+                                                                 @"RAHILY",
+                                                                 @"WESTERN GATEWAY",
+                                                                 @"CASTLEWHITE",
+                                                                 @"WEST WING",
+                                                                 @"EAST WING",
+                                                                 @"NORTH WING",
+                                                                 @"DEVERE HALL",
+                                                                 @"STUDENT CENTRE",
+                                                                 @"KANE",
+                                                                 @"LIBRARY",
+                                                                 @"BOOLE BASEMENT",
+                                                                 @"BUILDING",
+                                                                 @"GLUCKSMAN GALLERY",
+                                                                 @"WHATS NEAR ME",
+                                                                 @"WGB",
+                                                                 @"WW",
+                                                                 @"TAKE ME TO THE",
+                                                                 @"STOP",
+                                                                 @"YES",
+                                                                 @"NO",
+                                                                 @"SAVE",
+                                                                 nil]];
+        NSString *name = @"LocationsNames";
+        
+        NSError *err = [lmGenerator generateLanguageModelFromArray:languageArray withFilesNamed:name];
+        
+        //[languageArray release];
+        NSDictionary *languageGeneratorResults = nil;
+        
+        //[lmGenerator release];
+        if([err code] == noErr) {
+            
+            languageGeneratorResults = [err userInfo];
+            
+            self.pathToDynamicallyGeneratedGrammar = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"volcab.gram"];
+            self.pathToDynamicallyGeneratedDictionary = [languageGeneratorResults objectForKey:@"DictionaryPath"];
+        }
+        [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:YES];
+    }
+}
 - (void) pocketsphinxDidStartCalibration {
 	NSLog(@"Pocketsphinx calibration has started.");
 }
@@ -219,11 +320,20 @@
 
 
 }
-
+-(void)updateDict{
+    [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:NO];
+}
 - (void) pocketsphinxDidStartListening {
+    //if(!self.isListening){
     //[self.pocketsphinxController suspendRecognition];
-
+    
+    //[self.pocketsphinxController resumeRecognition];
 	NSLog(@"Pocketsphinx is now listening.");
+    if(voiceRecogActive){
+        [self checkForVoiceDetection];
+    }else{
+        //[self.pocketsphinxController suspendRecognition];
+    }
 }
 
 - (void) pocketsphinxDidDetectSpeech {
@@ -233,6 +343,14 @@
 - (void) pocketsphinxDidDetectFinishedSpeech {
     
 	NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    player = nil;
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = 1; //Infinite
+    
+    [player play];
+    
 }
 
 - (void) pocketsphinxDidStopListening {
@@ -240,11 +358,20 @@
 }
 
 - (void) pocketsphinxDidSuspendRecognition {
+    
 	NSLog(@"Pocketsphinx has suspended recognition.");
 }
 
 - (void) pocketsphinxDidResumeRecognition {
-	NSLog(@"Pocketsphinx has resumed recognition.");
+    voiceRecogActive = NO;
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    if(player != nil) [player release];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = 1; //Infinite
+    player.delegate = self;
+    [player play];
+    NSLog(@"Pocketsphinx has resumed recognition.");
 }
 
 - (void) pocketsphinxDidChangeLanguageModelToFile:(NSString *)newLanguageModelPathAsString andDictionary:(NSString *)newDictionaryPathAsString {
@@ -269,16 +396,26 @@
         [self speakSentence:[queue objectAtIndex:0]];
         [queue removeObject:[queue objectAtIndex:0]];
     }
+    [self checkForVoiceDetection];
 }
+-(void)checkForVoiceDetection{
+    if(voiceRecogActive){
 
+        [self.pocketsphinxController resumeRecognition];
+        
+        
+    }
+}
 
 #pragma AV PLayer Delegate methods
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    NSLog(@"PLayer dur %f", player.duration);
+    //NSLog(@"PLayer dur %f", player.duration);
     //This is really really bad but a quick fix for now
-    if(player.duration <= 0.38){
-        [self.pocketsphinxController resumeRecognition];
-    }
+    //if(player.duration <= 0.38){
+        //NSLog(@"Re-run");
+        //[self.pocketsphinxController resumeRecognition];
+    //}
+    //[self checkForVoiceDetection];
 }
 
 @end

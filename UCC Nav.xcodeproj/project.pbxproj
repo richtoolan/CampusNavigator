@@ -14,7 +14,6 @@
 		D22D95C11677B70E00EE8523 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C01677B70E00EE8523 /* QuartzCore.framework */; };
 		D22D95C31677B71D00EE8523 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C21677B71D00EE8523 /* libz.dylib */; };
 		D22D95C51677B72A00EE8523 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D95C41677B72A00EE8523 /* libsqlite3.dylib */; };
-		D22D95C91677B7A600EE8523 /* MapBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D22D95C81677B7A600EE8523 /* MapBox.bundle */; };
 		D22E398516639F2B007D174B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398416639F2B007D174B /* UIKit.framework */; };
 		D22E398716639F2B007D174B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398616639F2B007D174B /* Foundation.framework */; };
 		D22E398916639F2B007D174B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22E398816639F2B007D174B /* CoreGraphics.framework */; };
@@ -39,15 +38,13 @@
 		D234AB8D16836F4B0011D563 /* marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D234AB8B16836F4B0011D563 /* marker@2x.png */; };
 		D234AB901683A3DC0011D563 /* CNAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */; };
 		D23D50B216CFC4E400260794 /* CNLanguageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D23D50B116CFC4E400260794 /* CNLanguageModel.m */; };
-		D245A41B16A36DB70090A9A8 /* CNGeneralTree.m in Sources */ = {isa = PBXBuildFile; fileRef = D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */; };
-		D245A41E16A370300090A9A8 /* CNNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D245A41D16A370300090A9A8 /* CNNode.m */; };
 		D24F70051694BCF6002E7B34 /* volcab.gram in Resources */ = {isa = PBXBuildFile; fileRef = D24F70041694BCF6002E7B34 /* volcab.gram */; };
 		D25A10F916833D3C00640BD9 /* cmu07a.dic in Resources */ = {isa = PBXBuildFile; fileRef = D25A10F816833D3C00640BD9 /* cmu07a.dic */; };
 		D268E1831697560F00A67D49 /* FinalUCCMap.mbtiles in Resources */ = {isa = PBXBuildFile; fileRef = D268E1821697560F00A67D49 /* FinalUCCMap.mbtiles */; };
+		D2774E1A16EF550F0020FA09 /* MapBox.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2774E1916EF550F0020FA09 /* MapBox.bundle */; };
 		D277B3FA16E61FC0001CB603 /* StartBeep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D277B3F816E61FC0001CB603 /* StartBeep.mp3 */; };
 		D277B3FB16E61FC0001CB603 /* FinBeep2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */; };
 		D277FBDF169ECC8B00A89C8B /* CNPathFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */; };
-		D27D23DF16A41A7D00F0A88E /* TreeList.c in Sources */ = {isa = PBXBuildFile; fileRef = D27D23DE16A41A7D00F0A88E /* TreeList.c */; };
 		D27E1E1716E4A308003A126C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D27E1E1516E4A308003A126C /* Default-568h@2x.png */; };
 		D27E1E1816E4A308003A126C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D27E1E1616E4A308003A126C /* Default@2x.png */; };
 		D295115016B2A41E00A9C098 /* PESGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114716B2A41E00A9C098 /* PESGraph.m */; };
@@ -56,6 +53,10 @@
 		D295115316B2A41E00A9C098 /* PESGraphRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114D16B2A41E00A9C098 /* PESGraphRoute.m */; };
 		D295115416B2A41E00A9C098 /* PESGraphRouteStep.m in Sources */ = {isa = PBXBuildFile; fileRef = D295114F16B2A41E00A9C098 /* PESGraphRouteStep.m */; };
 		D298BCC21664CACD007319A9 /* CNUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D298BCC11664CACD007319A9 /* CNUtils.m */; };
+		D2AD072A16EFB99E00471ECA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD072816EFB99E00471ECA /* Icon@2x.png */; };
+		D2AD072B16EFB99E00471ECA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD072916EFB99E00471ECA /* Icon.png */; };
+		D2AD072D16EFB9CD00471ECA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD072C16EFB9CD00471ECA /* Icon.png */; };
+		D2AD072F16EFB9DA00471ECA /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2AD072E16EFB9DA00471ECA /* Icon@2x.png */; };
 		D2B2C53816C5170100C2F703 /* generic_route_20130208-112010.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */; };
 		D2B2C53B16C51E1600C2F703 /* garmin_route_20130208-112010.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */; };
 		D2B2C53E16C54B0E00C2F703 /* CNNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */; };
@@ -86,15 +87,14 @@
 		D22D95C01677B70E00EE8523 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D22D95C21677B71D00EE8523 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D22D95C41677B72A00EE8523 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		D22D95C81677B7A600EE8523 /* MapBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MapBox.bundle; path = ../../../Downloads/MapBox.framework/Versions/A/Resources/MapBox.bundle; sourceTree = "<group>"; };
-		D22E398016639F2B007D174B /* Campus Navigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Campus Navigator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22E398016639F2B007D174B /* UCC Nav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UCC Nav.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22E398416639F2B007D174B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D22E398616639F2B007D174B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D22E398816639F2B007D174B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D22E398C16639F2B007D174B /* Campus Navigator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Campus Navigator-Info.plist"; sourceTree = "<group>"; };
+		D22E398C16639F2B007D174B /* UCC Nav-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UCC Nav-Info.plist"; sourceTree = "<group>"; };
 		D22E398E16639F2B007D174B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D22E399016639F2B007D174B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D22E399216639F2B007D174B /* Campus Navigator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Campus Navigator-Prefix.pch"; sourceTree = "<group>"; };
+		D22E399216639F2B007D174B /* UCC Nav-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UCC Nav-Prefix.pch"; sourceTree = "<group>"; };
 		D22E399316639F2B007D174B /* CNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNAppDelegate.h; sourceTree = "<group>"; };
 		D22E399416639F2B007D174B /* CNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNAppDelegate.m; sourceTree = "<group>"; };
 		D22E39A116639F50007D174B /* CNRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRootViewController.h; sourceTree = "<group>"; };
@@ -120,18 +120,14 @@
 		D234AB911683A6AB0011D563 /* CNCustomAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCustomAnnotation.h; sourceTree = "<group>"; };
 		D23D50B016CFC4E400260794 /* CNLanguageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNLanguageModel.h; sourceTree = "<group>"; };
 		D23D50B116CFC4E400260794 /* CNLanguageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNLanguageModel.m; sourceTree = "<group>"; };
-		D245A41916A36DB70090A9A8 /* CNGeneralTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNGeneralTree.h; sourceTree = "<group>"; };
-		D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNGeneralTree.m; sourceTree = "<group>"; };
-		D245A41C16A370300090A9A8 /* CNNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNode.h; sourceTree = "<group>"; };
-		D245A41D16A370300090A9A8 /* CNNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNode.m; sourceTree = "<group>"; };
 		D24F70041694BCF6002E7B34 /* volcab.gram */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = volcab.gram; sourceTree = "<group>"; };
 		D25A10F816833D3C00640BD9 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
 		D268E1821697560F00A67D49 /* FinalUCCMap.mbtiles */ = {isa = PBXFileReference; lastKnownFileType = file; path = FinalUCCMap.mbtiles; sourceTree = "<group>"; };
+		D2774E1916EF550F0020FA09 /* MapBox.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MapBox.bundle; sourceTree = "<group>"; };
 		D277B3F816E61FC0001CB603 /* StartBeep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StartBeep.mp3; sourceTree = "<group>"; };
 		D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FinBeep2.mp3; sourceTree = "<group>"; };
 		D277FBDD169ECC8B00A89C8B /* CNPathFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPathFinder.h; sourceTree = "<group>"; };
 		D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPathFinder.m; sourceTree = "<group>"; };
-		D27D23DE16A41A7D00F0A88E /* TreeList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TreeList.c; sourceTree = "<group>"; };
 		D27E1E1516E4A308003A126C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D27E1E1616E4A308003A126C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D295114616B2A41E00A9C098 /* PESGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PESGraph.h; sourceTree = "<group>"; };
@@ -146,6 +142,10 @@
 		D295114F16B2A41E00A9C098 /* PESGraphRouteStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PESGraphRouteStep.m; sourceTree = "<group>"; };
 		D298BCC01664CACD007319A9 /* CNUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNUtils.h; sourceTree = "<group>"; };
 		D298BCC11664CACD007319A9 /* CNUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNUtils.m; sourceTree = "<group>"; };
+		D2AD072816EFB99E00471ECA /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		D2AD072916EFB99E00471ECA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D2AD072C16EFB9CD00471ECA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D2AD072E16EFB9DA00471ECA /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "generic_route_20130208-112010.gpx"; sourceTree = "<group>"; };
 		D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "garmin_route_20130208-112010.gpx"; sourceTree = "<group>"; };
 		D2B2C53C16C54B0E00C2F703 /* CNNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNavigator.h; sourceTree = "<group>"; };
@@ -202,11 +202,13 @@
 		D22E397516639F2B007D174B = {
 			isa = PBXGroup;
 			children = (
+				D2AD072E16EFB9DA00471ECA /* Icon@2x.png */,
+				D2AD072C16EFB9CD00471ECA /* Icon.png */,
 				D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */,
 				D2B2C53716C5170100C2F703 /* generic_route_20130208-112010.gpx */,
 				D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */,
 				D234AB6A16835C950011D563 /* Framework */,
-				D22D95C81677B7A600EE8523 /* MapBox.bundle */,
+				D2774E1916EF550F0020FA09 /* MapBox.bundle */,
 				D22D95C41677B72A00EE8523 /* libsqlite3.dylib */,
 				D22D95C21677B71D00EE8523 /* libz.dylib */,
 				D22D95C01677B70E00EE8523 /* QuartzCore.framework */,
@@ -226,7 +228,7 @@
 		D22E398116639F2B007D174B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D22E398016639F2B007D174B /* Campus Navigator.app */,
+				D22E398016639F2B007D174B /* UCC Nav.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,39 +246,13 @@
 		D22E398A16639F2B007D174B /* Campus Navigator */ = {
 			isa = PBXGroup;
 			children = (
+				D2AD073416EFBD3900471ECA /* StandardClasses */,
+				D2AD073316EFBCFD00471ECA /* DataClasses */,
+				D2AD073216EFBCD700471ECA /* VoiceClasses */,
+				D2AD073116EFBCBA00471ECA /* MapClasses */,
+				D2AD073016EFBCA300471ECA /* NavigationClasses */,
 				D295115616B2A42500A9C098 /* PESGraph */,
-				D2B2C53C16C54B0E00C2F703 /* CNNavigator.h */,
-				D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */,
-				D21E60BD168336D0004F1C9E /* CNOpenEars.h */,
-				D21E60BE168336D0004F1C9E /* CNOpenEars.m */,
-				D22E399316639F2B007D174B /* CNAppDelegate.h */,
-				D22E399416639F2B007D174B /* CNAppDelegate.m */,
-				D22E39A116639F50007D174B /* CNRootViewController.h */,
-				D22E39A216639F50007D174B /* CNRootViewController.m */,
-				D2E0FA621663A5DF00483E18 /* CNCommon.h */,
-				D298BCC01664CACD007319A9 /* CNUtils.h */,
-				D298BCC11664CACD007319A9 /* CNUtils.m */,
-				D2B535A6166513A700F3713E /* CNMapViewController.h */,
-				D2B535A7166513A700F3713E /* CNMapViewController.m */,
-				D234AB8E1683A3DB0011D563 /* CNAnnotationView.h */,
-				D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */,
-				D234AB911683A6AB0011D563 /* CNCustomAnnotation.h */,
-				D277FBDD169ECC8B00A89C8B /* CNPathFinder.h */,
-				D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */,
-				D2B400CA169ECF3800F10B8B /* CNGetNearestPath.h */,
-				D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */,
-				D2B400CE169ED01C00F10B8B /* CNDAO.h */,
-				D2B400CF169ED01C00F10B8B /* CNDAO.m */,
 				D22E398B16639F2B007D174B /* Supporting Files */,
-				D245A41916A36DB70090A9A8 /* CNGeneralTree.h */,
-				D245A41A16A36DB70090A9A8 /* CNGeneralTree.m */,
-				D245A41C16A370300090A9A8 /* CNNode.h */,
-				D245A41D16A370300090A9A8 /* CNNode.m */,
-				D27D23DE16A41A7D00F0A88E /* TreeList.c */,
-				D2D79F0716B6921B0039A3C2 /* CNPathAction.h */,
-				D2D79F0816B6921B0039A3C2 /* CNPathAction.m */,
-				D23D50B016CFC4E400260794 /* CNLanguageModel.h */,
-				D23D50B116CFC4E400260794 /* CNLanguageModel.m */,
 			);
 			path = "Campus Navigator";
 			sourceTree = "<group>";
@@ -284,6 +260,8 @@
 		D22E398B16639F2B007D174B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D2AD072816EFB99E00471ECA /* Icon@2x.png */,
+				D2AD072916EFB99E00471ECA /* Icon.png */,
 				D277B3F816E61FC0001CB603 /* StartBeep.mp3 */,
 				D277B3F916E61FC0001CB603 /* FinBeep2.mp3 */,
 				D27E1E1516E4A308003A126C /* Default-568h@2x.png */,
@@ -298,10 +276,10 @@
 				D2E0FA5A1663A51300483E18 /* google_maps.png */,
 				D2E0FA5B1663A51300483E18 /* locate.png */,
 				D2E0FA5C1663A51300483E18 /* near.png */,
-				D22E398C16639F2B007D174B /* Campus Navigator-Info.plist */,
+				D22E398C16639F2B007D174B /* UCC Nav-Info.plist */,
 				D22E398D16639F2B007D174B /* InfoPlist.strings */,
 				D22E399016639F2B007D174B /* main.m */,
-				D22E399216639F2B007D174B /* Campus Navigator-Prefix.pch */,
+				D22E399216639F2B007D174B /* UCC Nav-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -355,12 +333,73 @@
 			name = PESGraph;
 			sourceTree = "<group>";
 		};
+		D2AD073016EFBCA300471ECA /* NavigationClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D2D79F0716B6921B0039A3C2 /* CNPathAction.h */,
+				D2D79F0816B6921B0039A3C2 /* CNPathAction.m */,
+				D2B2C53C16C54B0E00C2F703 /* CNNavigator.h */,
+				D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */,
+				D277FBDD169ECC8B00A89C8B /* CNPathFinder.h */,
+				D277FBDE169ECC8B00A89C8B /* CNPathFinder.m */,
+				D2B400CA169ECF3800F10B8B /* CNGetNearestPath.h */,
+				D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */,
+			);
+			name = NavigationClasses;
+			sourceTree = "<group>";
+		};
+		D2AD073116EFBCBA00471ECA /* MapClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D2B535A6166513A700F3713E /* CNMapViewController.h */,
+				D2B535A7166513A700F3713E /* CNMapViewController.m */,
+				D234AB8E1683A3DB0011D563 /* CNAnnotationView.h */,
+				D234AB8F1683A3DC0011D563 /* CNAnnotationView.m */,
+				D234AB911683A6AB0011D563 /* CNCustomAnnotation.h */,
+			);
+			name = MapClasses;
+			sourceTree = "<group>";
+		};
+		D2AD073216EFBCD700471ECA /* VoiceClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D21E60BD168336D0004F1C9E /* CNOpenEars.h */,
+				D21E60BE168336D0004F1C9E /* CNOpenEars.m */,
+				D23D50B016CFC4E400260794 /* CNLanguageModel.h */,
+				D23D50B116CFC4E400260794 /* CNLanguageModel.m */,
+			);
+			name = VoiceClasses;
+			sourceTree = "<group>";
+		};
+		D2AD073316EFBCFD00471ECA /* DataClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D2B400CE169ED01C00F10B8B /* CNDAO.h */,
+				D2B400CF169ED01C00F10B8B /* CNDAO.m */,
+			);
+			name = DataClasses;
+			sourceTree = "<group>";
+		};
+		D2AD073416EFBD3900471ECA /* StandardClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D22E399316639F2B007D174B /* CNAppDelegate.h */,
+				D22E399416639F2B007D174B /* CNAppDelegate.m */,
+				D22E39A116639F50007D174B /* CNRootViewController.h */,
+				D22E39A216639F50007D174B /* CNRootViewController.m */,
+				D2E0FA621663A5DF00483E18 /* CNCommon.h */,
+				D298BCC01664CACD007319A9 /* CNUtils.h */,
+				D298BCC11664CACD007319A9 /* CNUtils.m */,
+			);
+			name = StandardClasses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D22E397F16639F2B007D174B /* Campus Navigator */ = {
+		D22E397F16639F2B007D174B /* UCC Nav */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D22E399E16639F2B007D174B /* Build configuration list for PBXNativeTarget "Campus Navigator" */;
+			buildConfigurationList = D22E399E16639F2B007D174B /* Build configuration list for PBXNativeTarget "UCC Nav" */;
 			buildPhases = (
 				D22E397C16639F2B007D174B /* Sources */,
 				D22E397D16639F2B007D174B /* Frameworks */,
@@ -370,9 +409,9 @@
 			);
 			dependencies = (
 			);
-			name = "Campus Navigator";
+			name = "UCC Nav";
 			productName = "Campus Navigator";
-			productReference = D22E398016639F2B007D174B /* Campus Navigator.app */;
+			productReference = D22E398016639F2B007D174B /* UCC Nav.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -385,7 +424,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = UCC;
 			};
-			buildConfigurationList = D22E397A16639F2B007D174B /* Build configuration list for PBXProject "Campus Navigator" */;
+			buildConfigurationList = D22E397A16639F2B007D174B /* Build configuration list for PBXProject "UCC Nav" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -397,7 +436,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D22E397F16639F2B007D174B /* Campus Navigator */,
+				D22E397F16639F2B007D174B /* UCC Nav */,
 			);
 		};
 /* End PBXProject section */
@@ -412,7 +451,6 @@
 				D2E0FA5E1663A51300483E18 /* google_maps.png in Resources */,
 				D2E0FA5F1663A51300483E18 /* locate.png in Resources */,
 				D2E0FA601663A51300483E18 /* near.png in Resources */,
-				D22D95C91677B7A600EE8523 /* MapBox.bundle in Resources */,
 				D25A10F916833D3C00640BD9 /* cmu07a.dic in Resources */,
 				D234AB7C16835C950011D563 /* feat.params in Resources */,
 				D234AB7D16835C950011D563 /* mdef in Resources */,
@@ -437,6 +475,11 @@
 				D27E1E1816E4A308003A126C /* Default@2x.png in Resources */,
 				D277B3FA16E61FC0001CB603 /* StartBeep.mp3 in Resources */,
 				D277B3FB16E61FC0001CB603 /* FinBeep2.mp3 in Resources */,
+				D2774E1A16EF550F0020FA09 /* MapBox.bundle in Resources */,
+				D2AD072A16EFB99E00471ECA /* Icon@2x.png in Resources */,
+				D2AD072B16EFB99E00471ECA /* Icon.png in Resources */,
+				D2AD072D16EFB9CD00471ECA /* Icon.png in Resources */,
+				D2AD072F16EFB9DA00471ECA /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,9 +500,6 @@
 				D277FBDF169ECC8B00A89C8B /* CNPathFinder.m in Sources */,
 				D2B400CC169ECF3800F10B8B /* CNGetNearestPath.m in Sources */,
 				D2B400D0169ED01C00F10B8B /* CNDAO.m in Sources */,
-				D245A41B16A36DB70090A9A8 /* CNGeneralTree.m in Sources */,
-				D245A41E16A370300090A9A8 /* CNNode.m in Sources */,
-				D27D23DF16A41A7D00F0A88E /* TreeList.c in Sources */,
 				D295115016B2A41E00A9C098 /* PESGraph.m in Sources */,
 				D295115116B2A41E00A9C098 /* PESGraphNode.m in Sources */,
 				D295115216B2A41E00A9C098 /* PESGraphEdge.m in Sources */,
@@ -544,8 +584,8 @@
 					"\"$(SRCROOT)/Framework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Campus Navigator/Campus Navigator-Prefix.pch";
-				INFOPLIST_FILE = "Campus Navigator/Campus Navigator-Info.plist";
+				GCC_PREFIX_HEADER = "Campus Navigator/UCC Nav-Prefix.pch";
+				INFOPLIST_FILE = "Campus Navigator/UCC Nav-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/MapBox-iOS-SDK/MapView/Map/GRMustache/lib\"",
@@ -556,7 +596,7 @@
 					"-ObjC",
 					"-v",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "UCC Nav";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "781D9F10-6535-407E-9F33-D306621AD6F6";
 				WRAPPER_EXTENSION = app;
 			};
@@ -571,8 +611,8 @@
 					"\"$(SRCROOT)/Framework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Campus Navigator/Campus Navigator-Prefix.pch";
-				INFOPLIST_FILE = "Campus Navigator/Campus Navigator-Info.plist";
+				GCC_PREFIX_HEADER = "Campus Navigator/UCC Nav-Prefix.pch";
+				INFOPLIST_FILE = "Campus Navigator/UCC Nav-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/MapBox-iOS-SDK/MapView/Map/GRMustache/lib\"",
@@ -583,7 +623,7 @@
 					"-ObjC",
 					"-v",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "UCC Nav";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -591,7 +631,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D22E397A16639F2B007D174B /* Build configuration list for PBXProject "Campus Navigator" */ = {
+		D22E397A16639F2B007D174B /* Build configuration list for PBXProject "UCC Nav" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D22E399C16639F2B007D174B /* Debug */,
@@ -600,7 +640,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D22E399E16639F2B007D174B /* Build configuration list for PBXNativeTarget "Campus Navigator" */ = {
+		D22E399E16639F2B007D174B /* Build configuration list for PBXNativeTarget "UCC Nav" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D22E399F16639F2B007D174B /* Debug */,

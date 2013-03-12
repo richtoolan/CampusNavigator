@@ -41,12 +41,22 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
 //selects the tuple 'data' from the DB 'table' with a limit of 'limit' 0 being none optional ordering by ID if 'order' is set
 -(id)init{
     if(self = [super init]){
-        db = [[[FMDatabase alloc] initWithPath:
-               
-               [[NSBundle mainBundle] pathForResource:@"appData" ofType:@"sqlite"]] retain];
+        //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        //NSString *documentsDirectory = [paths objectAtIndex:0];
+        //NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"appData.sqlite"];
+        //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
+        //[db open];
+        
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *docsPath = [paths objectAtIndex:0];
+        
+        db = [[FMDatabase databaseWithPath:[docsPath stringByAppendingPathComponent:@"appData.sqlite"]] retain];
+        //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
         [db open];
         
         sqlite3_create_function(db.sqliteHandle, "distance", 4, SQLITE_UTF8, NULL, &distanceFunc, NULL, NULL);
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         
         //array = [[[NSMutableArray alloc] init] retain];
         
@@ -90,17 +100,23 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
         //[self updateDatabaseConnections];
          
         //NSLog(@"%@", [self getNearestBuidingForString:@"Western"]);
+
         
+
         
     }
     
     return self;
 }
+
 -(NSDictionary *)selectData:(NSString *)data fromTable:(NSString *)table withLimit:(int)limit andOrdering:(BOOL)order{
     return nil;
 }
 //updates
 -(BOOL)updateData:(NSString *)data fromTable:(NSString *)table{
+    //[db beginTransaction];
+    //[db executeUpdate:@"INSERT INTO buildingNodes VALUES(8,'ATM','',0,0,50.0,8.0)"];
+    //[db commit];
     return YES;
 }
 -(BOOL)removeData:(NSString *)data fromTable:(NSString *)table{
