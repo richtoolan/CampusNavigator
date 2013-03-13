@@ -7,6 +7,7 @@
 //
 
 #import "CNDAO.h"
+#import "CNUtils.h"
 #import <CoreLocation/CoreLocation.h>
 #define DEG2RAD(degrees) (degrees * 0.01745327) // degrees * pi over 180
 #define d2r (M_PI / 180.0)
@@ -41,17 +42,25 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
 //selects the tuple 'data' from the DB 'table' with a limit of 'limit' 0 being none optional ordering by ID if 'order' is set
 -(id)init{
     if(self = [super init]){
+        //[CNDAO createEditableCopyOfDatabaseIfNeeded];
         //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //NSString *documentsDirectory = [paths objectAtIndex:0];
         //NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"appData.sqlite"];
         //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
         //[db open];
+        NSArray *paths;
+        NSString *docsPath;
+        if([CNUtils createEditableCopyOfDatabaseIfNeeded]){
+            paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            docsPath = [[paths objectAtIndex:0]  stringByAppendingPathComponent:@"appData.sqlite"];
+        }else{
+            //paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            docsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"appData.sqlite"];
+            
+            
+        }
         
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *docsPath = [paths objectAtIndex:0];
-        
-        db = [[FMDatabase databaseWithPath:[docsPath stringByAppendingPathComponent:@"appData.sqlite"]] retain];
+        db = [[FMDatabase databaseWithPath:docsPath ]retain];
         //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
         [db open];
         

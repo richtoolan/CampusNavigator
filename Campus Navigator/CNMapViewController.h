@@ -12,6 +12,7 @@
     RMMapView *_mapView;
     NSDictionary *pathsInView;
 }
+@property (nonatomic, retain) id parentPointer;
 -(id)initWithFrame:(CGRect)frame;
 -(void)addAnnotationForPoints:(NSArray *)points;
 -(void)removePathAnnotation;

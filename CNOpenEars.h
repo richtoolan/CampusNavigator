@@ -21,7 +21,8 @@
     AVAudioPlayer *player;
     BOOL spelling;
     BOOL spellingWord;
-    BOOL voiceRecogActive;
+    BOOL waitToSpeak;
+    BOOL queueResume;
 	
 	// Our NSTimer that will help us read and display the input and output levels without locking the UI
     Slt *slt;

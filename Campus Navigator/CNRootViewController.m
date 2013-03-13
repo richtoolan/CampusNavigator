@@ -86,14 +86,14 @@ BOOL debug = YES;
             }
         }else{
             if (debug) {
-                [self.navigator beginNavigationToLocation:@"Western Gateway Building"];
+                [self.navigator beginNavigationToLocation:@"Student Centre"];
             }else{
                 if(self.openEars.isListening){
                 
                     [self.openEars speakSentence:@"Voice control stopped."];
                     [self.openEars stopListen];
                 }else{
-                    [self.openEars resumeRecognition];
+                    [self.openEars listen];
                 }
             }
             //[self.navigator beginNavigationToLocation:@"Western Gateway Building"];
@@ -198,6 +198,7 @@ BOOL debug = YES;
     //mapView.alpha = 0.8;//
     //NSLog(@"%@", [pathFinder getNodesForPathFrom:33 toDest:36]);
     //[mapView ]
+    mapView.parentPointer = self;
     [self.view addSubview:mapView];
     //[dao pathFrom:@"30" to:@"12"];
 
@@ -270,6 +271,9 @@ BOOL debug = YES;
         [self.openEars stopListen];
         [self.openEars speakSentence:@"Navigation Stopped"];
     }
+}
+-(void)annotationClickedWithString:(NSString *)string{
+    [self giveStringLocation:string];
 }
 
 -(void)dealloc{

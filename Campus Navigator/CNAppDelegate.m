@@ -8,6 +8,7 @@
 
 #import "CNAppDelegate.h"
 #import "CNRootViewController.h"
+#import "CNUtils.h"
 @implementation CNAppDelegate
 
 - (void)dealloc
@@ -25,6 +26,7 @@
     CNRootViewController *rootVC = [[[CNRootViewController alloc] init] autorelease];
     self.window.rootViewController = rootVC;
     application.applicationSupportsShakeToEdit = YES;
+
     //[self.window addSubview:rootVC.view];
     return YES;
 }

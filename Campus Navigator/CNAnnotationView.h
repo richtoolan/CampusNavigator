@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class CNCustomAnnotation;
+@class CNAnnotationDelegate;
 @interface CNAnnotationView : UIViewController{
     BOOL _viewExpanded;
     UIButton *_moreInfo;
     UIButton *_takeMeHere;
+    
 }
+@property (nonatomic, retain)CNAnnotationDelegate *delegate;
+
 - (id)initWithFrame:(CGRect)frame andText:(NSString*)anno;
 @end

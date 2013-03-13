@@ -19,7 +19,7 @@
 #define YELLOW [UIColor colorWithRed:(244/255.0) green:(255/255.0) blue:(118/255.0) alpha:1.f]
 
 @implementation CNMapViewController
-
+@synthesize parentPointer;
 -(id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self){
@@ -93,6 +93,7 @@
         }];
     }if(anno.annoView == nil){
         CNAnnotationView *view = [[[CNAnnotationView alloc] initWithFrame:CGRectMake(GRID_SIZE*2, GRID_SIZE*2, self.frame.size.width - (GRID_SIZE * 2), GRID_SIZE *4) andText:anno.string] retain];
+        view.delegate = self.parentPointer;
         [self.superview addSubview:view.view];
         [UIView animateWithDuration:.5 animations:^(){
             view.view.alpha = .9;
@@ -288,5 +289,9 @@
     //[_mapView addAnnotation:[[CNCustomAnnotation alloc]initWithMapView:_mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079)  andTitle:@"Quad" andString:@"Quad Centre"]];
     //[[RMAnnotation alloc] initWithMapView:<#(RMMapView *)#> coordinate:(CLLocationCoordinate2D) andTitle:<#(NSString *)#>]
     //[mapView addAnnotation:[[CustomAnnotation alloc ] initWithMapView:mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079) andTtle:@"WGB" add]];
+}
+-(void)testClick{
+    
+    NSLog(@"Click worked yo!"   );
 }
 @end

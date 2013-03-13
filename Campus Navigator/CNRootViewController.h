@@ -18,7 +18,10 @@
 -(void)setPathObject:(NSArray *)pointsArray;
 
 @end
+@protocol CNAnnotationDelegate
+-(void)annotationClickedWithString:(NSString *)string;
 
+@end
 @interface CNRootViewController : UIViewController<CNOpenEarsDelegate, RMMapViewDelegate, CNNavigatorDelegate>{
     //CNMapViewController *_mapView;
     CNOpenEars *openEars;

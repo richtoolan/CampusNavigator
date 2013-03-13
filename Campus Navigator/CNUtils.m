@@ -70,4 +70,29 @@ void audioRouteChangeListenerCallback (
     
 
 }
++ (BOOL)createEditableCopyOfDatabaseIfNeeded {
+    // First, test for existence.
+    BOOL success;
+    BOOL newInstallation;
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"appData.sqlite"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    newInstallation = !success;
+    if (success) {
+        [fileManager release];
+        return newInstallation;
+    }
+    // The writable database does not exist, so copy the default to the appropriate location.
+    //NSLog(@"database does not exist");
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"appData.sqlite"];
+    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    [fileManager release];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    }
+    return newInstallation;
+}
 @end

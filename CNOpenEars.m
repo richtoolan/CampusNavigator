@@ -73,13 +73,16 @@
 -(void)setUp{
     queue = [[[NSMutableArray alloc] init] retain];
     confirmNav = NO;
+    spelling = YES;
+    waitToSpeak = NO;
+    queueResume = NO;
+    //voiceRecogActive = NO;
     [self speakSentence:@"Setting up voice."];
     //[self.pocketsphinxController en]
     NSLog(@"SET UP CALLED");
     if(! self.pathToDynamicallyGeneratedDictionary){
         //player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-        spelling = YES;
-        voiceRecogActive = NO;
+        
         LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
         NSArray *languageArray = [[NSArray alloc] initWithArray:[NSArray arrayWithObjects: // All capital letters.
                                                              @"ORB",
@@ -132,36 +135,55 @@
     self.isListening = YES;
     //[self performSelectorOnMainThread]
     [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:YES];
+   
 }
 
 -(void)stopListen{
     self.isListening = NO;
+    queueResume = NO;
+    waitToSpeak = NO;
     [self.pocketsphinxController stopListening];
 }
--(void)suspendRecognition{
-    voiceRecogActive = NO;
+-(void)suspendRecoginition{
+    //voiceRecogActive = NO;
     //[player performSelectorOnMainThread:@selector(play) withObject:nil waitUntilDone:YES];
     [self.pocketsphinxController suspendRecognition];
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    player = nil;
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = 1; //Infinite
     
+    [player play];
 }
 -(void)resumeRecognition{
-    if(!self.isListening){
-        [self listen];
-    }
-        voiceRecogActive = YES;
+    //if(!self.isListening){
+    //   [self listen];
+    //}
+    //voiceRecogActive = NO;
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    if(player != nil) [player release];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = 1; //Infinite
+    player.delegate = self;
+    [player play];
+    waitToSpeak = YES;
+        //voiceRecogActive = YES;
         
     
 }
 
 - (void) pocketsphinxDidReceiveHypothesis:(NSString *)hypothesis recognitionScore:(NSString *)recognitionScore utteranceID:(NSString *)utteranceID {
    //[self performSelectorOnMainThread:@selector(suspendRecognition) withObject:nil waitUntilDone:YES];
-    [self suspendRecognition];
+    [self suspendRecoginition];
     
     //[hypothesis retain];
     if([hypothesis isEqualToString:@"(null)"]|| [hypothesis length] < 3 ){
         //Theres an error the sentence is either incomplete of we can't recognise what the user is saying
         [self speakSentence:@"Sorry I couldn't understand that."];
-        [self resumeRecognition];
+        queueResume = YES;
+        //[self resumeRecognition];
     }else{
         if(confirmNav){
             confirmNav = NO;
@@ -170,17 +192,19 @@
                 //[self speakSentence:@""]
             
                 [delegate giveStringLocation:stringLocation];
-                [self suspendRecognition];
+                //[self suspendRecognition];
             }else if([hypothesis isEqualToString:@"NO"]){
                 //incorrect place try again
                 [self speakSentence:@"Speak command now"];
-                [self resumeRecognition];
+                //[self resumeRecognition];
+                queueResume = YES;
                 
             }else{
                 //error please repeat
                 confirmNav = YES;
                 [self speakSentence:[NSString stringWithFormat:@"Sorry I didn't get that. Confirm Navigation to %@ ", stringLocation]];
-                [self resumeRecognition];
+                //[self resumeRecognition];
+                queueResume = YES;
             }
         }
        else if ([hypothesis rangeOfString:@"TAKE ME"].location != NSNotFound ) {
@@ -191,21 +215,25 @@
            [stringLocation retain];
             [self speakSentence:[NSString stringWithFormat:@"Confirm Navigation to. %@", stringLocation]];
            confirmNav = YES;
-           [self resumeRecognition];
+           //[self resumeRecognition];
+           queueResume = YES;
            //[delegate giveStringLocation:[hypothesis stringByReplacingOccurrencesOfString:@"TAKE ME" withString:@""]];
             //[self stopListen];
        }else if([hypothesis isEqualToString:@"SAVE"] || spellingWord){
            if ([hypothesis isEqualToString:@"SAVE"]) {
                spellingWord = YES;
+               queueResume = YES;
            }else{
                spellingWord = NO;
+               queueResume = YES;
            }
            [self dyamicallySwitchDictionary];
            
        }
        else{
            [self speakSentence:@"Sorry I didn't get that."];
-           [self resumeRecognition];
+           //[self resumeRecognition];
+           queueResume = YES;
        }
         
         //[CNUtils displayAlertWithTitle:@"YOU SAID" andText:hypothesis andButtonText:@"OK"];
@@ -264,8 +292,7 @@
             self.pathToDynamicallyGeneratedDictionary = [languageGeneratorResults objectForKey:@"DictionaryPath"];
         }
 
-    [self performSelectorOnMainThread:@selector(updateDict) withObject:nil waitUntilDone:YES];
-    [self resumeRecognition];
+        [self updateDict];
     }else{
         spelling = YES;
         LanguageModelGenerator *lmGenerator = [[LanguageModelGenerator alloc] init];
@@ -310,6 +337,7 @@
             self.pathToDynamicallyGeneratedDictionary = [languageGeneratorResults objectForKey:@"DictionaryPath"];
         }
         [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:YES];
+        [self resumeRecognition];
     }
 }
 - (void) pocketsphinxDidStartCalibration {
@@ -322,6 +350,7 @@
 }
 -(void)updateDict{
     [self.pocketsphinxController startListeningWithLanguageModelAtPath:self.pathToDynamicallyGeneratedGrammar dictionaryAtPath:self.pathToDynamicallyGeneratedDictionary languageModelIsJSGF:NO];
+    [self resumeRecognition];
 }
 - (void) pocketsphinxDidStartListening {
     //if(!self.isListening){
@@ -329,11 +358,12 @@
     
     //[self.pocketsphinxController resumeRecognition];
 	NSLog(@"Pocketsphinx is now listening.");
-    if(voiceRecogActive){
-        [self checkForVoiceDetection];
-    }else{
+    [self resumeRecognition];
+    //if(voiceRecogActive){
+    //    [self checkForVoiceDetection];
+    //}else{
         //[self.pocketsphinxController suspendRecognition];
-    }
+    //}
 }
 
 - (void) pocketsphinxDidDetectSpeech {
@@ -343,13 +373,7 @@
 - (void) pocketsphinxDidDetectFinishedSpeech {
     
 	NSLog(@"Pocketsphinx has detected a period of silence, concluding an utterance.");
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"FinBeep2" ofType:@"mp3"];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    player = nil;
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.numberOfLoops = 1; //Infinite
-    
-    [player play];
+
     
 }
 
@@ -363,14 +387,7 @@
 }
 
 - (void) pocketsphinxDidResumeRecognition {
-    voiceRecogActive = NO;
-    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"StartBeep" ofType:@"mp3"];
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    if(player != nil) [player release];
-    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
-    player.numberOfLoops = 1; //Infinite
-    player.delegate = self;
-    [player play];
+
     NSLog(@"Pocketsphinx has resumed recognition.");
 }
 
@@ -396,15 +413,18 @@
         [self speakSentence:[queue objectAtIndex:0]];
         [queue removeObject:[queue objectAtIndex:0]];
     }
-    [self checkForVoiceDetection];
+    if(queueResume){
+        queueResume = NO;
+        [self resumeRecognition];
+    }
 }
 -(void)checkForVoiceDetection{
-    if(voiceRecogActive){
+    //if(voiceRecogActive){
 
-        [self.pocketsphinxController resumeRecognition];
+    //    [self.pocketsphinxController resumeRecognition];
         
         
-    }
+    //}
 }
 
 #pragma AV PLayer Delegate methods
@@ -416,6 +436,10 @@
         //[self.pocketsphinxController resumeRecognition];
     //}
     //[self checkForVoiceDetection];
+    if(waitToSpeak){
+        waitToSpeak = NO;
+        [self.pocketsphinxController resumeRecognition];
+    }
 }
 
 @end

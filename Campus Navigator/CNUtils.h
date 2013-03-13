@@ -11,4 +11,5 @@
 @interface CNUtils : NSObject
 +(void)displayAlertWithTitle:(NSString *)title andText:(NSString *)bodyText andButtonText:(NSString *)bText;
 -(void)isHeadsetPluggedIn;
++ (BOOL)createEditableCopyOfDatabaseIfNeeded;
 @end
