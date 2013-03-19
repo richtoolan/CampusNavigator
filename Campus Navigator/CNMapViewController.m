@@ -37,6 +37,7 @@
         _mapView.adjustTilesForRetinaDisplay = YES; // these tiles aren't designed specifically for retina, so make them legible
 
         [self addAnnotation];
+
         [self addSubview:_mapView];
     }
     return self;
@@ -50,18 +51,21 @@
     if([annotation isKindOfClass:[RMUserLocation class]]){
         //user type loc
         return nil;
+    }else if ([annotation isKindOfClass:[CNCustomAnnotation class]] ){
+        NSPredicate * regexTest = [NSPredicate predicateWithFormat:@"SELF MATCHES '^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$'"];
+        NSString *title = annotation.title;
+        if([regexTest evaluateWithObject:title]){
+            NSLog(@"annotation title is %@", annotation.title);
+            return [self layerForPoints:[pathsInView objectForKey:annotation.title]];
+        }
+        
+        RMMarker *marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker.png"] anchorPoint:CGPointMake(.5, .8)];
+        return marker;
     }
-    NSPredicate * regexTest = [NSPredicate predicateWithFormat:@"SELF MATCHES '^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$'"];
-    NSString *title = annotation.title;
-    if([regexTest evaluateWithObject:title]){
-        NSLog(@"annotation title is %@", annotation.title);
-        return [self layerForPoints:[pathsInView objectForKey:annotation.title]];
-    }
+
     return annotation.layer;
-    //else{
-    //    RMMarker *marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker.png"] anchorPoint:CGPointMake(.5, .8)];
-    //    return marker;
-    //}
+    
+    
 
 }
 -(void)removePathAnnotation{
@@ -92,7 +96,7 @@
             anno.annoView.view.alpha = .9;
         }];
     }if(anno.annoView == nil){
-        CNAnnotationView *view = [[[CNAnnotationView alloc] initWithFrame:CGRectMake(GRID_SIZE*2, GRID_SIZE*2, self.frame.size.width - (GRID_SIZE * 2), GRID_SIZE *4) andText:anno.string] retain];
+        CNAnnotationView *view = [[[CNAnnotationView alloc] initWithFrame:CGRectMake(GRID_SIZE*2, GRID_SIZE*2, self.frame.size.width - (GRID_SIZE * 2), GRID_SIZE *2.4) andText:anno.string] retain];
         view.delegate = self.parentPointer;
         [self.superview addSubview:view.view];
         [UIView animateWithDuration:.5 animations:^(){
@@ -195,7 +199,18 @@
     return [shape autorelease];
 
 }
+-(void)addBuildings:(NSArray *)buildings{
+    for(NSDictionary *building in buildings){
+        CLLocation *location = [building objectForKey:@"pointCoordinate"];
+        NSString *name = [building objectForKey:@"name"];
+        CNCustomAnnotation *anno = [[CNCustomAnnotation alloc] initWithMapView:_mapView coordinate:location.coordinate andTitle:name andString:name andCentre:location.coordinate];
+        
+        [_mapView addAnnotation:anno];
+        //[anno release];
+    }
+}
 -(void)addAnnotation{
+    /*
     //initWithMapView:(RMMapView *)mapview coordinate:(CLLocationCoordinate2D)coord andTitle:(NSString *)ttle andString:(NSString *)string
     //51.893036,-8.500505
     RMShape *shape = [[[RMShape alloc] initWithView:_mapView] retain];
@@ -289,6 +304,7 @@
     //[_mapView addAnnotation:[[CNCustomAnnotation alloc]initWithMapView:_mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079)  andTitle:@"Quad" andString:@"Quad Centre"]];
     //[[RMAnnotation alloc] initWithMapView:<#(RMMapView *)#> coordinate:(CLLocationCoordinate2D) andTitle:<#(NSString *)#>]
     //[mapView addAnnotation:[[CustomAnnotation alloc ] initWithMapView:mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079) andTtle:@"WGB" add]];
+     */
 }
 -(void)testClick{
     

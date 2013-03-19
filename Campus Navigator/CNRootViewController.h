@@ -28,7 +28,11 @@
     NSArray *points;
     CNNavigator *navigator;
     CNMapViewController *mapView;
-
+    //BOOL userVIP;
+    BOOL userIdentified;
+    BOOL userVip;
+    UIButton *actionButton;
+    BOOL vibrateRequired;
     
     
 }

@@ -39,9 +39,10 @@
         speakTimer = [[[NSDate alloc] init] retain];
         //Speak timer started depending on levels we'll either speak a lot or very little.
         [self speakStatusSentence:turn andDistance:distance];
-        
+        notificationCount ++;
     }else{
         [self checkForNeedToReport:distance andTurnString:turn andIndex:index];
+        notificationCount ++;
     }
     
     

@@ -257,7 +257,7 @@ didUpdateToLocation:(CLLocation *)newLocation
     //disable timers
     //empty arrays
     //
-    [self.openears speakSentence:@"Navigation stopped"];
+    [self.openears speakTerminationSentence:@"Navigation stopped"];
     [self.man stopUpdatingLocation];
     [self.man stopUpdatingHeading];
     [self.langMod reset];

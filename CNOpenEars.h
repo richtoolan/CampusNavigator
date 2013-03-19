@@ -23,6 +23,8 @@
     BOOL spellingWord;
     BOOL waitToSpeak;
     BOOL queueResume;
+    
+    BOOL vibrateRequired;
 	
 	// Our NSTimer that will help us read and display the input and output levels without locking the UI
     Slt *slt;
@@ -49,8 +51,10 @@
 -(id)initWithDelegate:(id)delegate;
 -(void)listen;
 -(void)speakSentence:(NSString *)sentence;
+-(void)speakTerminationSentence:(NSString *)sentence;
 -(void)setUp;
 -(void)stopListen;
 -(void)resumeRecognition;
 -(void)suspendRecoginition;
+-(void)stopListenAndVibrate;
 @end

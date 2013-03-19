@@ -75,9 +75,9 @@
     confirmNav = NO;
     spelling = YES;
     waitToSpeak = NO;
+    vibrateRequired = NO;
     queueResume = NO;
     //voiceRecogActive = NO;
-    [self speakSentence:@"Setting up voice."];
     //[self.pocketsphinxController en]
     NSLog(@"SET UP CALLED");
     if(! self.pathToDynamicallyGeneratedDictionary){
@@ -142,6 +142,13 @@
     self.isListening = NO;
     queueResume = NO;
     waitToSpeak = NO;
+    [self.pocketsphinxController stopListening];
+}
+-(void)stopListenAndVibrate{
+    self.isListening = NO;
+    queueResume = NO;
+    waitToSpeak = NO;
+    vibrateRequired = YES;
     [self.pocketsphinxController stopListening];
 }
 -(void)suspendRecoginition{
@@ -379,6 +386,11 @@
 
 - (void) pocketsphinxDidStopListening {
 	NSLog(@"Pocketsphinx has stopped listening.");
+    if(vibrateRequired){
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        vibrateRequired = NO;
+    }
 }
 
 - (void) pocketsphinxDidSuspendRecognition {
@@ -401,12 +413,20 @@
 -(void)speakSentence:(NSString *)sentence{
     if(! [self.fliteController speechInProgress]){
         self.fliteController.speechInProgress = NO;
-    [self.fliteController say:sentence withVoice:self.slt];
+        [self.fliteController say:sentence withVoice:self.slt];
     }else{
         [queue addObject:sentence];
     }
     
 
+}
+-(void)speakTerminationSentence:(NSString *)sentence{
+    [queue removeAllObjects];
+    [self.fliteController interruptTalking];
+    [self.fliteController say:sentence withVoice:self.slt];
+
+    
+    
 }
 -(void)fliteDidFinishSpeaking{
     if([queue count] > 0){

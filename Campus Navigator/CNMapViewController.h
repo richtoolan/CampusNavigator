@@ -16,4 +16,5 @@
 -(id)initWithFrame:(CGRect)frame;
 -(void)addAnnotationForPoints:(NSArray *)points;
 -(void)removePathAnnotation;
+-(void)addBuildings:(NSArray *)buildings;
 @end

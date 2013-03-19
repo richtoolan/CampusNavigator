@@ -22,4 +22,5 @@
 -(void)updateDatabaseConnections;
 -(NSMutableArray *)testPathID:(int)val :(NSMutableArray *)arr dest:(int)dest;
 -(NSDictionary *)getNearestBuidingForString:(NSString *)building;
+-(NSArray *)getBuildingNodes;
 @end

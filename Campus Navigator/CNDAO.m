@@ -122,6 +122,23 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
     return nil;
 }
 //updates
+-(NSArray *)getBuildingNodes{
+    NSMutableArray *buildingList = [[NSMutableArray alloc] init];
+    NSString *query = [NSString stringWithFormat:@"SELECT * FROM buildingNodes"];
+    FMResultSet *rs = [[db executeQuery:query] retain];
+    
+    
+    while([rs next]){
+        NSMutableDictionary *buildingObject = [[NSMutableDictionary alloc] init];
+        [buildingObject setValue:[rs stringForColumn:@"name"] forKey:@"name"];
+        [buildingObject setValue:[[[CLLocation alloc] initWithLatitude:[rs doubleForColumn:@"buildingLat"] longitude:[rs doubleForColumn:@"buildingLon"]] autorelease] forKey:@"pointCoordinate"];
+        [buildingList addObject:buildingObject];
+        [buildingObject release];
+    }
+    [rs release];
+    return [buildingList autorelease];
+    
+}
 -(BOOL)updateData:(NSString *)data fromTable:(NSString *)table{
     //[db beginTransaction];
     //[db executeUpdate:@"INSERT INTO buildingNodes VALUES(8,'ATM','',0,0,50.0,8.0)"];

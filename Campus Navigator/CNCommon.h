@@ -9,6 +9,7 @@
 #define BUTTON_GRID_SIZE 25.0f
 #define GRID_SIZE 10.0f
 #define BUTTON_COLOUR [UIColor whiteColor]
+#define VIP_COLOUR [UIColor redColor]
 #define TILE_WIDTH 819
 #define TILE_HEIGHT 583
 

@@ -21,6 +21,7 @@
 		D22E399116639F2B007D174B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E399016639F2B007D174B /* main.m */; };
 		D22E399516639F2B007D174B /* CNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E399416639F2B007D174B /* CNAppDelegate.m */; };
 		D22E39A316639F50007D174B /* CNRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22E39A216639F50007D174B /* CNRootViewController.m */; };
+		D22FF46A16F8643C00E48AE6 /* CNDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = D22FF46916F8643C00E48AE6 /* CNDAO.m */; };
 		D234AB7C16835C950011D563 /* feat.params in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6D16835C950011D563 /* feat.params */; };
 		D234AB7D16835C950011D563 /* mdef in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6E16835C950011D563 /* mdef */; };
 		D234AB7E16835C950011D563 /* means in Resources */ = {isa = PBXBuildFile; fileRef = D234AB6F16835C950011D563 /* means */; };
@@ -61,7 +62,6 @@
 		D2B2C53B16C51E1600C2F703 /* garmin_route_20130208-112010.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D2B2C53A16C51E1600C2F703 /* garmin_route_20130208-112010.gpx */; };
 		D2B2C53E16C54B0E00C2F703 /* CNNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B2C53D16C54B0E00C2F703 /* CNNavigator.m */; };
 		D2B400CC169ECF3800F10B8B /* CNGetNearestPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */; };
-		D2B400D0169ED01C00F10B8B /* CNDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B400CF169ED01C00F10B8B /* CNDAO.m */; };
 		D2B400F5169F149000F10B8B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */; };
 		D2B400F8169F1AE300F10B8B /* appData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D2B400F7169F1AE300F10B8B /* appData.sqlite */; };
 		D2B534DB1664F81F00F3713E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B534DA1664F81F00F3713E /* AVFoundation.framework */; };
@@ -99,6 +99,7 @@
 		D22E399416639F2B007D174B /* CNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNAppDelegate.m; sourceTree = "<group>"; };
 		D22E39A116639F50007D174B /* CNRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRootViewController.h; sourceTree = "<group>"; };
 		D22E39A216639F50007D174B /* CNRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRootViewController.m; sourceTree = "<group>"; };
+		D22FF46916F8643C00E48AE6 /* CNDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNDAO.m; sourceTree = "<group>"; };
 		D234AB6B16835C950011D563 /* cmu07a.dic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmu07a.dic; sourceTree = "<group>"; };
 		D234AB6D16835C950011D563 /* feat.params */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feat.params; sourceTree = "<group>"; };
 		D234AB6E16835C950011D563 /* mdef */ = {isa = PBXFileReference; lastKnownFileType = file; path = mdef; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		D2B400CA169ECF3800F10B8B /* CNGetNearestPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNGetNearestPath.h; sourceTree = "<group>"; };
 		D2B400CB169ECF3800F10B8B /* CNGetNearestPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNGetNearestPath.m; sourceTree = "<group>"; };
 		D2B400CE169ED01C00F10B8B /* CNDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNDAO.h; sourceTree = "<group>"; };
-		D2B400CF169ED01C00F10B8B /* CNDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNDAO.m; path = "/Applications/Xcode.app/Contents/Developer/../../../../Users/RichardToolan/Documents/Developing/Campus Navigator/Campus Navigator/CNDAO.m"; sourceTree = "<absolute>"; };
 		D2B400E7169F016200F10B8B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		D2B400F7169F1AE300F10B8B /* appData.sqlite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = appData.sqlite; sourceTree = "<group>"; };
 		D2B534DA1664F81F00F3713E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -375,7 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				D2B400CE169ED01C00F10B8B /* CNDAO.h */,
-				D2B400CF169ED01C00F10B8B /* CNDAO.m */,
+				D22FF46916F8643C00E48AE6 /* CNDAO.m */,
 			);
 			name = DataClasses;
 			sourceTree = "<group>";
@@ -499,7 +499,6 @@
 				D234AB901683A3DC0011D563 /* CNAnnotationView.m in Sources */,
 				D277FBDF169ECC8B00A89C8B /* CNPathFinder.m in Sources */,
 				D2B400CC169ECF3800F10B8B /* CNGetNearestPath.m in Sources */,
-				D2B400D0169ED01C00F10B8B /* CNDAO.m in Sources */,
 				D295115016B2A41E00A9C098 /* PESGraph.m in Sources */,
 				D295115116B2A41E00A9C098 /* PESGraphNode.m in Sources */,
 				D295115216B2A41E00A9C098 /* PESGraphEdge.m in Sources */,
@@ -509,6 +508,7 @@
 				D22AAEE516B9278000576016 /* UtilitiesGeo.c in Sources */,
 				D2B2C53E16C54B0E00C2F703 /* CNNavigator.m in Sources */,
 				D23D50B216CFC4E400260794 /* CNLanguageModel.m in Sources */,
+				D22FF46A16F8643C00E48AE6 /* CNDAO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
