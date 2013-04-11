@@ -46,7 +46,7 @@
 -(void)mapViewRegionDidChange:(RMMapView *)mapView{
     [self hideVisibleAnnotationsWithAnnotation:nil];
 }
-
+//delegate method, returns the view layer for the annotation
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation {
     if([annotation isKindOfClass:[RMUserLocation class]]){
         //user type loc
@@ -55,7 +55,7 @@
         NSPredicate * regexTest = [NSPredicate predicateWithFormat:@"SELF MATCHES '^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$'"];
         NSString *title = annotation.title;
         if([regexTest evaluateWithObject:title]){
-            NSLog(@"annotation title is %@", annotation.title);
+            ////NSLog(@"annotation title is %@", annotation.title);
             return [self layerForPoints:[pathsInView objectForKey:annotation.title]];
         }
         
@@ -68,6 +68,11 @@
     
 
 }
+//centres maps on the point location
+-(void)centreOnPoint:(CLLocation *)location{
+    [_mapView setCenterCoordinate:location.coordinate animated:YES];
+}
+//removes the path
 -(void)removePathAnnotation{
     NSPredicate * regexTest = [NSPredicate predicateWithFormat:@"SELF MATCHES '^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$'"];
     for(RMAnnotation *annotation in _mapView.annotations){
@@ -79,6 +84,7 @@
     }
     
 }
+//delegate method
 -(void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
     
     //Check for visibile annotations
@@ -107,9 +113,10 @@
         [view release];
     }
     //}else{
-    //    NSLog(@"%@", NSStringFromCGRect(anno.layer.bounds)  );
+    //    ////NSLog(@"%@", NSStringFromCGRect(anno.layer.bounds)  );
     //}
 }
+//delegate method
 -(void)hideVisibleAnnotationsWithAnnotation:(RMAnnotation *)anno{
     if(anno != nil){
     for(CNCustomAnnotation *cv in [_mapView annotations]){
@@ -137,7 +144,11 @@
         }
     }
 }
-
+/*************
+ -(void)addAnnotationForPoints:(NSArray *)points
+ 
+ Adds a path annotation for the points
+ ************/
 -(void)addAnnotationForPoints:(NSArray *)points{
     if ([points count]>0) {
         NSString* title = [NSString stringWithFormat:@"%@", [[points objectAtIndex:0] objectForKey:@"PARENT"] ];
@@ -158,6 +169,7 @@
     
     }
 }
+//delegate method
 -(RMShape *)layerForPoints:(NSArray *)points{
     RMShape *shape = [[[RMShape alloc] initWithView:_mapView] retain];;
     //NSString *title;
@@ -199,6 +211,11 @@
     return [shape autorelease];
 
 }
+/*************
+ -(void)addBuildings:(NSArray *)buildings
+ 
+ Add all buildings in building to the map.
+ ************/
 -(void)addBuildings:(NSArray *)buildings{
     for(NSDictionary *building in buildings){
         CLLocation *location = [building objectForKey:@"pointCoordinate"];
@@ -206,108 +223,11 @@
         CNCustomAnnotation *anno = [[CNCustomAnnotation alloc] initWithMapView:_mapView coordinate:location.coordinate andTitle:name andString:name andCentre:location.coordinate];
         
         [_mapView addAnnotation:anno];
-        //[anno release];
     }
 }
 -(void)addAnnotation{
-    /*
-    //initWithMapView:(RMMapView *)mapview coordinate:(CLLocationCoordinate2D)coord andTitle:(NSString *)ttle andString:(NSString *)string
-    //51.893036,-8.500505
-    RMShape *shape = [[[RMShape alloc] initWithView:_mapView] retain];
-    //51.893504,-8.492079
-    
-    [shape moveToCoordinate:CLLocationCoordinate2DMake(51.893117,-8.492541)];
-    [shape setLineWidth:3.0];
-    [shape setLineColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:1.f]];
 
-    //RMProjectedPoint point = RMProjectedPointMake;
-    //[shape addLineToProjectedPoint:point];
-    //[shape moveToCoordinate:CLLocationCoordinate2DMake(47.089634, 15.429118)];
-   // point = RMProjectedPointMake();
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893592,-8.492914)];
-    
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893768,-8.492351)];
-    
-    
-    //point = RMProjectedPointMake();
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893940,-8.492351)];
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.894100,-8.491886)];//
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893470,-8.491341)];
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893430,-8.491505)];
-    
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893825,-8.491822)];
-    
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893575,-8.492667)];
-    
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893163,-8.492376)];
-    //[shape addLineToProjectedPoint:point];
-    [shape setFillColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:0.5f]];
-    [shape setLineColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:1.f]];
-    [shape closePath];
-    
-    [shape moveToCoordinate:CLLocationCoordinate2DMake(51.893504,-8.492079)];
-    CNCustomAnnotation *anno = [[CNCustomAnnotation alloc] initWithMapView:_mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079) andTitle:@"" andString:@"WestWing" andCentre:CLLocationCoordinate2DMake(51.893504,-8.492079)];
-    
-    anno.layer = shape;
-    
-    [_mapView addAnnotation:anno];
-    
-    //anno.coordinate = CLLocationCoordinate2DMake(51.893504,-8.492079);
-    
-    [anno release];
-    [shape release];
-    shape =nil;
-    anno = [[CNCustomAnnotation alloc]initWithMapView:_mapView coordinate:CLLocationCoordinate2DMake(51.893036,-8.500505)  andTitle:@"WGB" andString:@"Western Gateway Building" andCentre:CLLocationCoordinate2DMake(51.893036,-8.500505)];
-    
-    shape = [[RMShape alloc] initWithView:_mapView] ;
-    //51.893504,-8.492079
-    
-    [shape moveToCoordinate:CLLocationCoordinate2DMake(51.892603,-8.501133)];
-    [shape setLineWidth:3.0];
-    [shape setLineColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:1.f]];
-    
-    //RMProjectedPoint point = RMProjectedPointMake;
-    //[shape addLineToProjectedPoint:point];
-    //[shape moveToCoordinate:CLLocationCoordinate2DMake(47.089634, 15.429118)];
-    // point = RMProjectedPointMake();
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893191,-8.501440)];
-    
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893465,-8.499991)];
-    
-    
-    //point = RMProjectedPointMake();
-    [shape addLineToCoordinate:CLLocationCoordinate2DMake(51.892888,-8.499689)];
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.894100,-8.491886)];//
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893470,-8.491341)];
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893430,-8.491505)];
-    
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893825,-8.491822)];
-    
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893575,-8.492667)];
-    
-    //[shape addLineToCoordinate:CLLocationCoordinate2DMake(51.893163,-8.492376)];
-    //[shape addLineToProjectedPoint:point];
-    [shape setFillColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:0.5f]];
-    [shape setLineColor:[UIColor colorWithRed:1.f green:0.f blue:0.f alpha:1.f]];
-    [shape closePath];
-    
-    [shape moveToCoordinate:CLLocationCoordinate2DMake(51.893504,-8.492079)];
-    anno.layer = shape;
-    
-    
-    [_mapView addAnnotation:anno];
-    
-    //
-    
-    [anno release];
-    [shape release];
-    //[_mapView addAnnotation:[[CNCustomAnnotation alloc]initWithMapView:_mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079)  andTitle:@"Quad" andString:@"Quad Centre"]];
-    //[[RMAnnotation alloc] initWithMapView:<#(RMMapView *)#> coordinate:(CLLocationCoordinate2D) andTitle:<#(NSString *)#>]
-    //[mapView addAnnotation:[[CustomAnnotation alloc ] initWithMapView:mapView coordinate:CLLocationCoordinate2DMake(51.893504,-8.492079) andTtle:@"WGB" add]];
-     */
 }
 -(void)testClick{
-    
-    NSLog(@"Click worked yo!"   );
 }
 @end

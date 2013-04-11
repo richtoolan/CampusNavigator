@@ -41,6 +41,7 @@
     }
     return self;
 }
+//sets the turn angle based on the value pased in during initilisation.
 -(void)setTurnStringFromAngle {
     // do your extra stuff here
     //  ...
@@ -53,7 +54,7 @@
         self.turnString = RIGHT;
     }else{
         //error case.
-        NSLog(@"The turn angle has caused an error the angle is : %f", turnAngle);
+        ////NSLog(@"The turn angle has caused an error the angle is : %f", turnAngle);
     }
     
     //[self setTurnAngle:turnAngle];

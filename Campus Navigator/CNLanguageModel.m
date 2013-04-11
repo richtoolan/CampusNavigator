@@ -12,14 +12,14 @@
 #define LEVEL1_DISTNACE 50
 #define LEVEL2_DISTNACE 25
 #define LEVEL3_DISTNACE 10
-#define NEAR_DISTANCE 7
+#define NEAR_DISTANCE 20
 @implementation CNLanguageModel
 @synthesize openEars;
 -(id)initWithLevel:(int)lvl andOE:(CNOpenEars *)OE andIndex:(int)index{
     self = [super init];
     if(self){
         level = lvl;
-        warnedAboutTurn = false;
+        warnedAboutTurn = NO;
         self.openEars = OE;
         currentPathIndex = index;
         //CLLocationDistance = [CLLocationDistance i]
@@ -32,7 +32,9 @@
     currentPathIndex = 0;
     notificationCount = 0;
 }
-
+/*************
+ delegate method
+ ************/
 -(void)updateToUserLoc:(CLLocationDistance)distance  
          andTurnString:(NSString *)turn andIndex:(int)index{
     if(speakTimer == nil){
@@ -47,6 +49,13 @@
     
     
 }
+/*************
+ -(void)checkForNeedToReport:(CLLocationDistance)distance
+ andTurnString:(NSString *)turn
+ andIndex:(int)index
+ 
+ Called to check if a report needs to be said to the user
+ ************/
 -(void)checkForNeedToReport:(CLLocationDistance)distance
               andTurnString:(NSString *)turn
                    andIndex:(int)index{
@@ -67,6 +76,7 @@
                         notificationCount ++;
                         previousDistance = distance;
                         previousTurnString = turn;
+                        
                         [self speakStatusSentence:turn andDistance:distance];
                     }
                 }
@@ -74,6 +84,7 @@
                 speakTimer = [[NSDate alloc] init];
                 currentPathIndex ++;
                 notificationCount = 0;
+                warnedAboutTurn = NO;
                 [self speakNewPath:distance andTurnString:turn];
                 //we've moved onto a new path let the user know
             }
@@ -94,6 +105,7 @@
                         notificationCount ++;
                         previousDistance = distance;
                         previousTurnString = turn;
+                        
                         [self speakStatusSentence:turn andDistance:distance];
                     
         
@@ -102,6 +114,8 @@
             }else{
                 speakTimer = [[NSDate alloc] init];
                 currentPathIndex ++;
+                warnedAboutTurn = NO;
+                
                 [self speakNewPath:distance andTurnString:turn];
                 
                 //we've moved onto a new path let the user know
@@ -123,11 +137,13 @@
                         notificationCount ++;
                         previousDistance = distance;
                         previousTurnString = turn;
+                        
                         [self speakStatusSentence:turn andDistance:distance];
                     
                     }
                 }
             }else{
+                warnedAboutTurn = NO;
                 speakTimer = [[NSDate alloc] init];
                 currentPathIndex ++;
                 [self speakNewPath:distance andTurnString:turn];
@@ -141,6 +157,7 @@
     }
     
 }
+//methods to handle speaking different types of sentences
 -(void)speakStatusSentence:(NSString *)turnString andDistance:(CLLocationDistance)distance{
     if([turnString isEqualToString:@"STRAIGHT"]){
         [self.openEars speakSentence:[NSString stringWithFormat:@"You're %.0f meters from going straight at a intersection.",distance]];
@@ -160,7 +177,7 @@
         [self.openEars speakSentence:[NSString stringWithFormat:@"You're %.0f meter from the destination, continue straight.",distance]];
         
     }else{
-        [self.openEars speakSentence:[NSString stringWithFormat:@"You're %.0f meters from the %@ turn, be ready to go %@.",distance, turnString, turnString]];
+        [self.openEars speakSentence:[NSString stringWithFormat:@"You're %.0f meters from the %@ turn, be ready to go %@, then,",distance, turnString, turnString]];
     }
 }
 -(void)speakNewPath:(CLLocationDistance)distance andTurnString:(NSString *)turnString{

@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 @interface CNUtils : NSObject
 +(void)displayAlertWithTitle:(NSString *)title andText:(NSString *)bodyText andButtonText:(NSString *)bText;
--(void)isHeadsetPluggedIn;
 + (BOOL)createEditableCopyOfDatabaseIfNeeded;
 + (BOOL)createEditableCopyOfVolcabIfNeeded;
++ (BOOL)createEditableCopyOfSecondVolcabIfNeeded;
 @end

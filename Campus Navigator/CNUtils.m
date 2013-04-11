@@ -15,61 +15,7 @@
     [alert show];
     [alert release];
 }
-//Detect if earphones are plugged into the device, this should be polled ocassionaly and change audio output if there's a change
-- (void)isHeadsetPluggedIn {
-    [[AVAudioSession sharedInstance] setDelegate: self];
-    
-
-
-    AudioSessionAddPropertyListener (
-                                     kAudioSessionProperty_AudioRouteChange,
-                                     audioRouteChangeListenerCallback,
-                                     self);
-}
-void audioRouteChangeListenerCallback (
-                                           void *inUserData,
-                                           AudioSessionPropertyID inPropertyID,
-                                           UInt32 inPropertyValueSize,
-                                           const void *inPropertyValue) 
-    {
-        CFDictionaryRef routeChangeDictionary = inPropertyValue;
-        CFNumberRef routeChangeReasonRef =
-        CFDictionaryGetValue (
-                              routeChangeDictionary,
-                              CFSTR (kAudioSession_AudioRouteChangeKey_Reason));
-        
-        SInt32 routeChangeReason;
-        
-        CFNumberGetValue (
-                          routeChangeReasonRef,
-                          kCFNumberSInt32Type,
-                          &routeChangeReason);
-        
-
-        //NSString *oldRouteString = (NSString *)oldRouteRef;
-        
-        
-        //****************
-        // kAudioSession_AudioRouteChangeKey_PreviousRouteDescription -> Previous route
-        // kAudioSession_AudioRouteChangeKey_CurrentRouteDescription -> Current route
-        
-        CFDictionaryRef newRouteRef = CFDictionaryGetValue(routeChangeDictionary, kAudioSession_AudioRouteChangeKey_CurrentRouteDescription);
-        NSDictionary *newRouteDict = (NSDictionary *)newRouteRef;
-        
-        // RouteDetailedDescription_Outputs -> Output
-        // RouteDetailedDescription_Outputs -> Input
-        
-        NSArray * paths = [[newRouteDict objectForKey: @"RouteDetailedDescription_Outputs"] count] ? [newRouteDict objectForKey: @"RouteDetailedDescription_Outputs"] : [newRouteDict objectForKey: @"RouteDetailedDescription_Inputs"];
-        
-        NSString * newRouteString = [[paths objectAtIndex: 0] objectForKey: @"RouteDetailedDescription_PortType"];
-        NSLog(@" route is %@", newRouteString);
-        // newRouteString -> MicrophoneWired, Speaker, LineOut, Headphone
-        
-        //**************
-        
-    
-
-    }
+// credit: http://www.icodeblog.com/2008/08/19/iphone-programming-tutorial-creating-a-todo-list-using-sqlite-part-1/#create-db
 + (BOOL)createEditableCopyOfDatabaseIfNeeded {
     // First, test for existence.
     BOOL success;
@@ -86,7 +32,7 @@ void audioRouteChangeListenerCallback (
         return newInstallation;
     }
     // The writable database does not exist, so copy the default to the appropriate location.
-    //NSLog(@"database does not exist");
+    //////NSLog(@"database does not exist");
     NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"appData.sqlite"];
     success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
     [fileManager release];
@@ -95,6 +41,7 @@ void audioRouteChangeListenerCallback (
     }
     return newInstallation;
 }
+//credit :http://www.icodeblog.com/2008/08/19/iphone-programming-tutorial-creating-a-todo-list-using-sqlite-part-1/#create-db
 + (BOOL)createEditableCopyOfVolcabIfNeeded {
     // First, test for existence.
     BOOL success;
@@ -111,8 +58,34 @@ void audioRouteChangeListenerCallback (
         return newInstallation;
     }
     // The writable database does not exist, so copy the default to the appropriate location.
-    //NSLog(@"database does not exist");
+    //////NSLog(@"database does not exist");
     NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"volcab.gram"];
+    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    [fileManager release];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable volcab file with message '%@'.", [error localizedDescription]);
+    }
+    return newInstallation;
+}
+//credit: http://www.icodeblog.com/2008/08/19/iphone-programming-tutorial-creating-a-todo-list-using-sqlite-part-1/#create-db
++ (BOOL)createEditableCopyOfSecondVolcabIfNeeded {
+    // First, test for existence.
+    BOOL success;
+    BOOL newInstallation;
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"speech.gram"];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    newInstallation = !success;
+    if (success) {
+        [fileManager release];
+        return newInstallation;
+    }
+    // The writable database does not exist, so copy the default to the appropriate location.
+    //////NSLog(@"database does not exist");
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"speech.gram"];
     success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
     [fileManager release];
     if (!success) {

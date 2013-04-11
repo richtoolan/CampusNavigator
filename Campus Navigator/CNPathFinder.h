@@ -18,6 +18,7 @@
 }
 -(NSArray *)getNodesForPathFrom:(int)org toDest:(int)dest andUserLoc:(CLLocationCoordinate2D)userLoc;
 -(NSDictionary *)getNearestPointForLat:(double)lat AndLon:(double)lon;
+-(NSDictionary *)getApproachingWarnings:(double)lat AndLon:(double)lon;
 -(NSArray *)generateDirectionObjects:(NSArray *)paths;
 -(NSArray *)compareAndUpdateCoordinates:(NSArray*)points;
 -(NSDictionary *)getNearestBuidingForString:(NSString *)building;

@@ -18,14 +18,15 @@
     CNPathFinder *pathFinder;
     CNLanguageModel *langMod;
 
-    CLLocationManager *man;
-    
+    CLLocationManager *locationManager;
+    BOOL debug;
     BOOL waitingForLoc;
     BOOL isNavigating;
     BOOL isApproachingTurn;
     BOOL notifiedAboutApproachingTurn;
     BOOL userWarnedAboutDest;
     BOOL detectedUserPassedTurn;
+    BOOL warnedAboutApprochingDanger;
     NSString *locationString;
     CLLocation *mostRecentLocation;
     CLHeading *mostRecentHeading;
@@ -33,12 +34,15 @@
     NSArray *currentPath;
     int currentPathIndex;
     NSTimeInterval timeSinceLastTurn;
+    //DEMO CODE
+    int innerArray;
+    NSTimer *timer;
 }
 @property(nonatomic, retain) CNNavigatorDelegate *delegate;
 @property(nonatomic, retain) CNOpenEars *openears;
 @property(nonatomic, retain) CNLanguageModel *langMod;
 @property(nonatomic, retain) CNPathFinder *pathFinder;
-@property(nonatomic, retain) CLLocationManager *man;
+@property(nonatomic, retain) CLLocationManager *locationManager;
 -(void)beginNavigationToLocation:(NSString *)location;
 -(void)voiceStringFromUser:(NSString *)voice;
 -(NSString *)getFourNearestWithDirections;

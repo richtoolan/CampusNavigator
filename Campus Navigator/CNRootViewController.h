@@ -18,6 +18,8 @@
 @end
 @protocol CNNavigatorDelegate
 -(void)setPathObject:(NSArray *)pointsArray;
+-(void)giveStringLocation:(NSString *)text;
+-(void)centreOnPoint:(CLLocation *)point;
 
 @end
 @protocol CNAnnotationDelegate
@@ -30,6 +32,7 @@
     NSArray *points;
     NSArray *places;
     CNNavigator *navigator;
+    //RMMapView =
     CNMapViewController *mapView;
     //BOOL userVIP;
     BOOL userIdentified;
@@ -37,6 +40,8 @@
     UIButton *actionButton;
     UILabel *buttonLabel;
     BOOL vibrateRequired;
+    UIButton *yesAnswer;
+    UITapGestureRecognizer *tapRecog;
     
 }
 @property (nonatomic, retain) CNOpenEars *openEars;

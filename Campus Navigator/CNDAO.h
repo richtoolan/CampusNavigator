@@ -19,6 +19,7 @@
 -(BOOL)updateData:(NSString *)data fromTable:(NSString *)table;
 -(BOOL)removeData:(NSString *)data fromTable:(NSString *)table;
 -(NSDictionary *)getNearestPointForLat:(double)lat AndLon:(double)lon;
+-(NSDictionary *)getApproachingWarnings:(double)lat AndLon:(double)lon;
 -(NSArray *)getPathNodesForParent:(int)parent;
 -(void)updateDatabaseConnections;
 -(NSMutableArray *)testPathID:(int)val :(NSMutableArray *)arr dest:(int)dest;

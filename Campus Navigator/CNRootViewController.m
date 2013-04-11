@@ -30,7 +30,6 @@ BOOL debug = NO;
         self.openEars = [[[CNOpenEars alloc] init] retain];
         self.openEars.delegate = (CNOpenEarsDelegate *)self;
         [self.openEars speakSentence:@"If you're visually impaired please press the bottom of the screen"];
-        //pathFinder = [[[CNPathFinder alloc] init] retain];
         self.navigator = [[CNNavigator alloc] init];
         userVip = NO;
         vibrateRequired = NO;
@@ -40,25 +39,36 @@ BOOL debug = NO;
         CNDAO *dao = [[CNDAO alloc] init];
         places = [[dao getBuildingNames] retain];
         [self.openEars updateVolcabWithPlaceNames:places];
-        //UITapGestureRecognizer *tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(trebleTap)];
-        //tapRecog.numberOfTapsRequired = 3;
-        //[self.view addGestureRecognizer:tapRecog];
-        //[tapRecog release];
-
-        //points = [[dao getNearestPointForLat:51.893677 AndLon:-8.49219] retain];
-        //NSLog(@"Point test: %@",[dao getNearestPointForLat:51.89367322618882 AndLon:-8.493998441763681]);
-        ////NSLog(@"Points are %@",points);
-        //NSMutableArray *arr = [dao testPathID:1:nil dest:12];
-        //[dao testPathID:5];
-        //NSLog(@"%@", arr);
-        
-    }
+        tapRecog = [[UITapGestureRecognizer alloc] init];
+        tapRecog.numberOfTapsRequired = 1;
+        tapRecog.numberOfTouchesRequired = 1;
+        [self.view addGestureRecognizer:tapRecog];
+}
     return self;
 }
-
+/**
+ *
+ *  touchBegan is called when the view is touched
+ *  used to handle the bounds of the yes button
+ *
+ *
+***/
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+  if(touchPoint.y >= yesAnswer.frame.origin.y){
+        [self didClickButton:yesAnswer];
+    }else{
+        [self.nextResponder touchesBegan:touches withEvent:event];
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    for (UIView *views in self.view.subviews) {
+        [views removeFromSuperview];
+    }
+    
     [self.view setBackgroundColor:[UIColor blackColor]];
     if(!userIdentified){
         UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(BUTTON_GRID_SIZE, BUTTON_GRID_SIZE, self.view.frame.size.width - (BUTTON_GRID_SIZE *2), self.view.frame.size.width /3)];
@@ -102,11 +112,12 @@ BOOL debug = NO;
         noAnswer.tag = 0;
         [self.view addSubview:noAnswer];
         noAnswer.transform = CGAffineTransformMakeScale(0.7, 0.7);
-        UIButton *yesAnswer = [UIButton buttonWithType:UIButtonTypeCustom];
+        yesAnswer = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         yesAnswer.layer.cornerRadius = 10.0;
         yesAnswer.tag = 1;
         [yesAnswer addTarget:self action:@selector(didClickButton:) forControlEvents:UIControlEventAllTouchEvents];
         [yesAnswer setBackgroundColor:[UIColor redColor]];
+    
         [yesAnswer setFrame:CGRectMake(BUTTON_GRID_SIZE, self.view.frame.size.height/2 +BUTTON_GRID_SIZE , (self.view.frame.size.width - (BUTTON_GRID_SIZE *2)), self.view.frame.size.height/2-(BUTTON_GRID_SIZE * 2))];
         [yesAnswer setTitle:@"Yes" forState:UIControlStateNormal];
         [yesAnswer setTintColor:[UIColor blackColor]];
@@ -140,21 +151,24 @@ BOOL debug = NO;
         [self setUpView];
     }
     [self.openEars setUp];
-
-    // Do any additional setup after loading the view.
 }
+/**
+ *
+ *  didClickButtons:sender
+ *  Object listener for when a button is clicked
+ *
+ *
+ ***/
 -(void)didClickButton:(id)sender{
-    
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     UIButton *button = (UIButton *)sender;
     if (button.tag) {
         if(!userIdentified){
             userIdentified = YES;
             userVip = YES;
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            [self.openEars speakSentence:@"Thanks, now touch the centre of the screen to activate voice commands, press it again to stop."];
             
-            //[self saveFavouriteWithName:@"Trial"];
+            [self.openEars speakSentence:@"Thanks, now touch the centre of the screen to activate voice commands, press it again to stop."];
         }
         
         
@@ -189,7 +203,13 @@ BOOL debug = NO;
     [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
-
+/**
+ *
+ *  trebleTap
+ *  Was called trebleTap to handle a trebleTap gesture on the screen
+ *  This was later removed for a better approach
+ *
+ ***/
 -(void)trebleTap
 {
     if(userVip){
@@ -220,8 +240,6 @@ BOOL debug = NO;
                 }
             }
         }else{
-            
-
             if (debug) {
                 [self.navigator beginNavigationToLocation:@"Student Centre"];
             }else{
@@ -238,26 +256,25 @@ BOOL debug = NO;
                         
                     }
                 }else{
-                    //[self.navigator stopNav];
-                    //[mapView removePathAnnotation];
-                    
                 }
             }
-            //[self.navigator beginNavigationToLocation:@"Western Gateway Building"];
         }
-        //[openEars listen];
         
-        //[self test];
-                //AudioServicesPlaySystemSoundWithVibration(4095,nil,dict);
-        //[CNUtils displayAlertWithTitle:@"Detected Shake" andText:@"Wait for prompt before speaking." andButtonText:@"OK"];
-       
     
 }
+/**
+ *
+ *  setUpView 
+ *  Called once the application has detrermined if the user is VIP or not.
+ *
+ *
+ ***/
 - (void)setUpView{
     
     CGRect parentFrame = self.view.frame;
     CGFloat buttonSize = 50.0f;
     //userVIP = YES;
+    [self.view removeGestureRecognizer:tapRecog];
     if(userVip){
     
         actionButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
@@ -278,6 +295,16 @@ BOOL debug = NO;
         actionButton.tag = 0;
         [actionButton setAlpha:0.0];
         actionButton.transform = CGAffineTransformMakeScale(0.7, 0.7);
+        UIButton *backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        [backButton addTarget:self action:@selector(reset) forControlEvents:UIControlEventAllTouchEvents];
+        [backButton setFrame:CGRectMake(0, 0, 20, 20)];
+        backButton.layer.cornerRadius = 3.0;
+        [backButton setBackgroundColor:[UIColor whiteColor]];
+        [backButton setTitle:@"<" forState:UIControlStateNormal];
+        [[backButton titleLabel] setTextColor:[UIColor blackColor]];
+        [self.view addSubview:backButton];
+        [backButton release];
+        
         [self.view addSubview:actionButton];
     }
     else{
@@ -296,94 +323,22 @@ BOOL debug = NO;
         
         [actionButton setAlpha:0.0];
         actionButton.transform  = CGAffineTransformMakeScale(0.7, 0.7);
+        UIButton *backButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        [backButton addTarget:self action:@selector(reset) forControlEvents:UIControlEventAllTouchEvents];
+        [backButton setFrame:CGRectMake(0, self.view.frame.size.height-20, 20, 20)];
+        backButton.layer.cornerRadius = 3.0;
+        [backButton setBackgroundColor:[UIColor whiteColor]];
+        [backButton setTitle:@"<" forState:UIControlStateNormal];
+        [[backButton titleLabel] setTextColor:[UIColor blackColor]];
+        [self.view addSubview:backButton];
+        [backButton release];
         [self.view addSubview:actionButton];
-        /*
-    mapView = [[CNMapViewController alloc] initWithFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
-    [mapView setContentSize:CGSizeMake(TILE_WIDTH/2 * 10, TILE_HEIGHT/2 * 10)];
-    [mapView setContentOffset:CGPointMake(TILE_WIDTH/2 * 5.5, TILE_HEIGHT/2 *5.5)];
-    //[]
 
-    //[mapView setZoomScale:2.0 animated:YES];
-    for (int i = 0; i <= 9; i ++){
-        for(int x = 0; x <= 9; x ++){
-            UIImageView *imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"map_tile_%i%i.png", i, x]]];
-            [imageTile setFrame:CGRectMake(TILE_WIDTH/2 * x, TILE_HEIGHT/2 * i, TILE_WIDTH/2, TILE_HEIGHT/2)];
-            imageTile.tag = i+x;
-            [mapView addSubview:imageTile];
-            [imageTile release];
-        }
-        
-    }
-    
-    UIImageView *imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_54.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *5, TILE_HEIGHT * 5, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_54.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *5, TILE_HEIGHT * 5, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_53.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *4, TILE_HEIGHT * 5, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_55.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *6, TILE_HEIGHT * 5, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_64.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *5, TILE_HEIGHT * 6, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_63.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *4, TILE_HEIGHT * 6, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    imageTile = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map_tile_65.png"]];
-    [imageTile setFrame:CGRectMake(TILE_WIDTH *6, TILE_HEIGHT * 6, TILE_WIDTH, TILE_HEIGHT)];
-    [mapView addSubview:imageTile];
-    [imageTile release];
-    
-    [self.view addSubview:mapView];
-    
-    */
-    
     mapView = [[CNMapViewController alloc] initWithFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
-    //mapView.alpha = 0.8;//
-    //NSLog(@"%@", [pathFinder getNodesForPathFrom:33 toDest:36]);
-    //[mapView ]
-    mapView.parentPointer = self;
-    [self.view addSubview:mapView];
+   [self.view addSubview:mapView];
         [mapView setAlpha:0.0];
         mapView.transform = CGAffineTransformMakeScale(0.7, 0.7);
-    //[dao pathFrom:@"30" to:@"12"];
-
-    //[mapView release];
-    /*
-    MKMapView *map = [[MKMapView alloc] init];
-    [map setFrame:CGRectMake(GRID_SIZE, GRID_SIZE, parentFrame.size.width - GRID_SIZE*2, parentFrame.size.height - buttonSize-BUTTON_GRID_SIZE *2 - GRID_SIZE)];
-    [map setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(51.893086, -8.491762), MKCoordinateSpanMake(0.001, 0.001))];
-    [map setMapType:MKMapTypeHybrid];
-    [map setShowsUserLocation:YES];
-    [self.view addSubview:map];
-    MyAnnotation *anno = [[MyAnnotation alloc] initWithCoordinate:CLLocationCoordinate2DMake(51.893086, -8.491762) andTitle:@"QUAD"];
-    MKAnnotationView *view = [[MKAnnotationView alloc] initWithAnnotation:anno reuseIdentifier:@"MAP_ANNO"];
-    view.image = [UIImage imageNamed:@"google_maps.png"];
-    [map addAnnotation:anno];*/
-    
-   // CNUtils *utils = [[CNUtils alloc] init];
-    //[utils isHeadsetPluggedIn];
-    /*
-    if([CNUtils isHeadsetPluggedIn]){
-        [CNUtils displayAlertWithTitle:@"HEADPHONES DETECTED" andText:@"Headphones are plugged in" andButtonText:@"OK"];
-    }else{
-        [CNUtils displayAlertWithTitle:@"HEADPHONES NOT FOUND" andText:@"Headphones are not plugged in" andButtonText:@"OK"];
-    }*/
-    
-    
-    //[utils release];
-    //[self.navigator beginNavigationToLocation:@"WGB"];
-    }
+}
     [UIView animateWithDuration:0.5 animations:^(){
         for (UIView *sv in [self.view subviews]){
             sv.transform = CGAffineTransformIdentity;
@@ -393,35 +348,39 @@ BOOL debug = NO;
         
         
     }];
-    //[self generateVoiceForFiveNearest];
     CNDAO *dao = [[CNDAO alloc] init];
-    //places = [[dao getBuildingNames] retain];
     NSArray *buildings = [[dao getBuildingNodes] retain];
     [mapView addBuildings:buildings];
     [dao release];
     [buildings release];
 }
+/**
+ *
+ *  reset 
+ *  Used during demoing to reset view and allow user to pick again
+ *
+ *
+ ***/
 
-/*-(void) test{
-    
-     float newScale = [mapView zoomScale] * 3.0;
-     CGRect zoomRect = [mapView zoomRectForScale:newScale withCenter:mapView.contentOffset];
-     [mapView zoomToRect:zoomRect animated:YES];
-     
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-}*/
-
+-(void)reset{
+    userIdentified = NO;
+    [self viewDidLoad];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+/**
+ *
+ *  setPathObject:pointArray
+ *  Keep point to pointsArray and displays path on the map.
+ *
+ *
+ ***/
 -(void)setPathObject:(NSArray *)pointsArray{
     
     points = [pointsArray retain];
-    
-    
-    //badly set map view
     for(NSArray *path in points){
         if ([path count] >= 1) {
             
@@ -431,37 +390,81 @@ BOOL debug = NO;
     }
     
 }
+/**
+ *
+ *  debug
+ *  used for enabling and disablin debug
+ *
+ *
+ ***/
 -(void)debug{
     debug = !debug;
 }
+/**
+ *
+ *  giveStringLocation:text
+ *  text is passed to navigator if it's not "STOP"
+ *
+ *
+ ***/
 -(void)giveStringLocation:(NSString *)text{
-    NSLog(@"String is %@", text);
-    if(![self.navigator isNavigating]){
+    if([text isEqualToString:@"STOP"]){
+        actionButton.enabled = NO;
+        [mapView removePathAnnotation];
+        [actionButton setBackgroundColor:[UIColor grayColor]];
+        [self.openEars stopListen];
+    }else if(![self.navigator isNavigating]){
         actionButton.enabled = YES;
         [actionButton setBackgroundColor:[UIColor redColor]];
         [self.navigator beginNavigationToLocation:text];
-    }else if([text isEqualToString:@"STOP"]){
-        actionButton.enabled = NO;
-        [actionButton setBackgroundColor:[UIColor grayColor]];
-        [self.navigator stopNav];
-        [self.openEars stopListen];
-        [self.openEars speakSentence:@"Navigation Stopped"];
+        [buttonLabel setText:@"STOP NAVIGATION"];
     }
 }
+/**
+ *
+ *  saveFavouriteWithName:name
+ *  saves the favourite name to the users Database
+ *
+ *
+ ***/
 -(void)saveFavouriteWithName:(NSString *)name{
     CNDAO *dao = [[CNDAO alloc] init];
     [dao saveFavouriteWithName:[[name stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"SPACE" withString:@" "] AndLocation:[self.navigator getUserLocation]];
     [self.openEars updateVolcabWithString:[[name stringByReplacingOccurrencesOfString:@" " withString:@""]stringByReplacingOccurrencesOfString:@"SPACE" withString:@" "]];
     [dao release];
 }
+/**
+ *
+ *  generateVoiceForFiveNearest
+ *  Called the voice controller with the navigators array of strings.
+ *
+ *
+ ***/
 -(void)generateVoiceForFiveNearest{
     [self.openEars speakSentence:[self.navigator getFourNearestWithDirections]];
 }
+/**
+ *
+ *  centreOnPoint:point
+ *  Tells the map view to centre on a coordinate
+ *
+ *
+ ***/
+-(void)centreOnPoint:(CLLocation *)point{
+    [mapView centreOnPoint:point];
+}
+/**
+ *
+ *  annotationClickedWithString:strin 
+ *  String is passed to the navigator to being navigation
+ *
+ *
+ ***/
 -(void)annotationClickedWithString:(NSString *)string{
     if([self.navigator isNavigating]){
-        [self.navigator stopNav];
+       [self.navigator stopNav];
         [mapView removePathAnnotation];
-        
+    
     }
     [self giveStringLocation:string];
 

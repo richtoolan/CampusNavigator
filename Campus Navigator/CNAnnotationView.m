@@ -30,31 +30,20 @@
         [labelText release];
         _takeMeHere =[UIButton buttonWithType:UIButtonTypeCustom];
         [[_takeMeHere titleLabel] setFont:[UIFont fontWithName:@"Gillsans-Bold" size:20.0]];
-        //CGRECTInset
         [_takeMeHere setFrame:CGRectInset(CGRectOffset(self.view.frame,  -(GRID_SIZE *2) , GRID_SIZE), (GRID_SIZE/2), 0)];
         [_takeMeHere addTarget:self action:@selector(testClick) forControlEvents:UIControlEventTouchDown];
         [_takeMeHere setTitle:@"Take Me Here" forState:UIControlStateNormal];
         _takeMeHere.layer.cornerRadius = GRID_SIZE;
         [_takeMeHere setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _takeMeHere.layer.backgroundColor = [[UIColor greenColor] CGColor];
-        //_moreInfo = [UIButton buttonWithType:UIButtonTypeCustom];
-        //[[_moreInfo titleLabel] setFont:[UIFont fontWithName:@"Arial-BoldMT" size:20.0]];
-        //[_moreInfo setFrame:CGRectInset(CGRectOffset(self.view.frame,  -(GRID_SIZE *2) , self.view.frame.size.height + (GRID_SIZE) ), (GRID_SIZE/2),  (GRID_SIZE/2))];
-        //[_moreInfo setFrame:CGRectOffset(self.view.frame, -(GRID_SIZE *4), self.view.frame.size.height + (GRID_SIZE*2))];
-        //[_moreInfo setTitle:@"More Info" forState:UIControlStateNormal];
-        //_moreInfo.layer.cornerRadius = GRID_SIZE;
-        //_moreInfo.layer.backgroundColor = [[UIColor redColor] CGColor];
         [self.view addSubview:_takeMeHere];
-        //[self.view addSubview:_moreInfo];
-        //_moreInfo.alpha = 0.0;
         _takeMeHere.alpha = 0.0;
-        // Initialization code
         
         [self touchesEnded:nil withEvent:nil];
     }
     return self;
 }
-
+//delegate method, resizes or shrinks the view
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     if(!_viewExpanded){
         _viewExpanded = YES;
@@ -81,13 +70,4 @@
     [self.delegate annotationClickedWithString:self.title];
 
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

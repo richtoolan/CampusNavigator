@@ -9,7 +9,7 @@
 #import "CNGetNearestPath.h"
 #import "CNDAO.h"
 @implementation CNGetNearestPath
-
+//never used.
 +(int)getNearestPath:(CLLocationCoordinate2D)coords{
     
     return 0;

@@ -17,4 +17,5 @@
 -(void)addAnnotationForPoints:(NSArray *)points;
 -(void)removePathAnnotation;
 -(void)addBuildings:(NSArray *)buildings;
+-(void)centreOnPoint:(CLLocation *)location;
 @end
