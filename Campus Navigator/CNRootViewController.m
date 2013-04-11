@@ -37,6 +37,9 @@ BOOL debug = NO;
         userIdentified = NO;
         self.navigator.delegate = (CNNavigatorDelegate *)self;
         self.navigator.openears = self.openEars;
+        CNDAO *dao = [[CNDAO alloc] init];
+        places = [[dao getBuildingNames] retain];
+        [self.openEars updateVolcabWithPlaceNames:places];
         //UITapGestureRecognizer *tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(trebleTap)];
         //tapRecog.numberOfTapsRequired = 3;
         //[self.view addGestureRecognizer:tapRecog];
@@ -92,7 +95,7 @@ BOOL debug = NO;
         [noAnswer setFrame:CGRectMake(self.view.frame.size.width/2+(BUTTON_GRID_SIZE *1.6),self.view.frame.size.width/2 + BUTTON_GRID_SIZE, (self.view.frame.size.width/2 - (BUTTON_GRID_SIZE *2)), BUTTON_GRID_SIZE * 2)];
         [noAnswer setTitle:@"No" forState:UIControlStateNormal];
         [noAnswer setTintColor:[UIColor blackColor]];
-        [noAnswer setFont:[UIFont fontWithName:@"GillSans" size:30.0]];
+        [[noAnswer titleLabel] setFont:[UIFont fontWithName:@"GillSans" size:30.0]];
         [noAnswer addTarget:self action:@selector(didClickButton:) forControlEvents:UIControlEventAllTouchEvents];
         
         [noAnswer setAlpha:0.0];
@@ -107,7 +110,7 @@ BOOL debug = NO;
         [yesAnswer setFrame:CGRectMake(BUTTON_GRID_SIZE, self.view.frame.size.height/2 +BUTTON_GRID_SIZE , (self.view.frame.size.width - (BUTTON_GRID_SIZE *2)), self.view.frame.size.height/2-(BUTTON_GRID_SIZE * 2))];
         [yesAnswer setTitle:@"Yes" forState:UIControlStateNormal];
         [yesAnswer setTintColor:[UIColor blackColor]];
-        [yesAnswer setFont:[UIFont fontWithName:@"GillSans" size:30.0]];
+        [[yesAnswer titleLabel]setFont:[UIFont fontWithName:@"GillSans" size:30.0]];
         
         [yesAnswer setAlpha:0.0];
         
@@ -141,15 +144,19 @@ BOOL debug = NO;
     // Do any additional setup after loading the view.
 }
 -(void)didClickButton:(id)sender{
-    userIdentified = YES;
+    
     UIButton *button = (UIButton *)sender;
     if (button.tag) {
-        if(userVip){
+        if(!userIdentified){
+            userIdentified = YES;
             userVip = YES;
             AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             [self.openEars speakSentence:@"Thanks, now touch the centre of the screen to activate voice commands, press it again to stop."];
+            
+            //[self saveFavouriteWithName:@"Trial"];
         }
+        
         
     }else{
         userVip = NO;
@@ -200,6 +207,7 @@ BOOL debug = NO;
                     
                     [self.navigator stopNav];
                     [mapView removePathAnnotation];
+                    
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                 }else{
@@ -221,10 +229,13 @@ BOOL debug = NO;
                     if(self.openEars.isListening){
                         [self.openEars speakSentence:@"Voice control stopped."];
                         [self.openEars stopListenAndVibrate];
+                        [buttonLabel setText:@"START VOICE CONTROL"];
                         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
                         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
                     }else{
                         [self.openEars listen];
+                        [buttonLabel setText:@"STOP VOICE CONTROL"];
+                        
                     }
                 }else{
                     //[self.navigator stopNav];
@@ -243,6 +254,7 @@ BOOL debug = NO;
     
 }
 - (void)setUpView{
+    
     CGRect parentFrame = self.view.frame;
     CGFloat buttonSize = 50.0f;
     //userVIP = YES;
@@ -252,7 +264,7 @@ BOOL debug = NO;
         [actionButton setBackgroundColor:VIP_COLOUR];
         [actionButton addTarget:self action:@selector(trebleTap) forControlEvents:UIControlEventTouchDown];
         [actionButton setFrame:CGRectMake(BUTTON_GRID_SIZE , BUTTON_GRID_SIZE, parentFrame.size.width -( BUTTON_GRID_SIZE *2), parentFrame.size.height -( BUTTON_GRID_SIZE *2)  )];
-        UILabel *buttonLabel = [[UILabel alloc] initWithFrame:CGRectOffset(actionButton.frame, -BUTTON_GRID_SIZE, -BUTTON_GRID_SIZE) ];
+         buttonLabel = [[UILabel alloc] initWithFrame:CGRectOffset(actionButton.frame, -BUTTON_GRID_SIZE, -BUTTON_GRID_SIZE) ];
         [buttonLabel setBackgroundColor:[UIColor clearColor]];
         [buttonLabel setText:@"START VOICE CONTROL"];
         [buttonLabel setNumberOfLines:3];
@@ -381,8 +393,9 @@ BOOL debug = NO;
         
         
     }];
+    //[self generateVoiceForFiveNearest];
     CNDAO *dao = [[CNDAO alloc] init];
-    
+    //places = [[dao getBuildingNames] retain];
     NSArray *buildings = [[dao getBuildingNodes] retain];
     [mapView addBuildings:buildings];
     [dao release];
@@ -435,8 +448,23 @@ BOOL debug = NO;
         [self.openEars speakSentence:@"Navigation Stopped"];
     }
 }
+-(void)saveFavouriteWithName:(NSString *)name{
+    CNDAO *dao = [[CNDAO alloc] init];
+    [dao saveFavouriteWithName:[[name stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"SPACE" withString:@" "] AndLocation:[self.navigator getUserLocation]];
+    [self.openEars updateVolcabWithString:[[name stringByReplacingOccurrencesOfString:@" " withString:@""]stringByReplacingOccurrencesOfString:@"SPACE" withString:@" "]];
+    [dao release];
+}
+-(void)generateVoiceForFiveNearest{
+    [self.openEars speakSentence:[self.navigator getFourNearestWithDirections]];
+}
 -(void)annotationClickedWithString:(NSString *)string{
+    if([self.navigator isNavigating]){
+        [self.navigator stopNav];
+        [mapView removePathAnnotation];
+        
+    }
     [self giveStringLocation:string];
+
 }
 
 -(void)dealloc{

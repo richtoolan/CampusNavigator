@@ -36,6 +36,8 @@
         currentPathIndex = 0;
         userWarnedAboutDest = NO;
         detectedUserPassedTurn = NO;
+        [self.man startUpdatingLocation];
+        [self.man startUpdatingHeading];
     
     }
     return self;
@@ -141,16 +143,16 @@ didUpdateToLocation:(CLLocation *)newLocation
     NSLog(@"Comparing path %i and %i", [[[self.pathFinder getNearestPointForLat:mostRecentLocation.coordinate.latitude AndLon:mostRecentLocation.coordinate.longitude] objectForKey:@"parentID"] intValue], [upComingAction.fromPath intValue]);
     if([[[self.pathFinder getNearestPointForLat:mostRecentLocation.coordinate.latitude AndLon:mostRecentLocation.coordinate.longitude] objectForKey:@"parentID"] intValue] != [upComingAction.fromPath intValue] && ![upComingAction.turnString isEqualToString:@"DEST"]){
         if(detectedUserPassedTurn ){
-            currentPathIndex ++;
+            //currentPathIndex ++;
             detectedUserPassedTurn = NO;
-            if(currentPathIndex > [pathsArray count]){
+            //if(currentPathIndex > [pathsArray count]){
                 //we've reached our dest
                 //[self stopNav];
                 
-            }else{
-                upComingAction = [turnActionsArray objectAtIndex:currentPathIndex];
-                currentPath = [pathsArray objectAtIndex:currentPathIndex];
-            }
+            //}else{
+            //    upComingAction = [turnActionsArray objectAtIndex:currentPathIndex];
+            //    currentPath = [pathsArray objectAtIndex:currentPathIndex];
+            //}
         }else{
             detectedUserPassedTurn = YES;
         }
@@ -246,6 +248,23 @@ didUpdateToLocation:(CLLocation *)newLocation
     //possibly cancel stop
     //re navigite
 }
+
+-(NSString *)getFourNearestWithDirections{
+    NSArray *values;
+    NSString *sentence = [@"The four nearest buildings are" retain];
+    if(mostRecentLocation){
+         values = (NSArray *)[self.pathFinder getNearestBuildings:mostRecentLocation.coordinate withBearing:mostRecentHeading.trueHeading];
+    
+    }else{
+         values = (NSArray *)[self.pathFinder getNearestBuildings:CLLocationCoordinate2DMake(51.89348,-8.492082) withBearing:mostRecentHeading.trueHeading];
+        
+    }
+    for(NSDictionary *value in values) {
+        sentence = [NSString stringWithFormat:@"%@ %@ %.0f meters",sentence, [value objectForKey:@"buildingName"],ceil([[value objectForKey:@"buildingDistance"] doubleValue]) ];
+    }
+    return sentence;
+}
+
 /***********************
  *
  * stopNav - Handles stopping of navigation and location services
@@ -268,5 +287,20 @@ didUpdateToLocation:(CLLocation *)newLocation
     userWarnedAboutDest = NO;
     
 }
-
+/***********************
+ *
+ * getUserLocation - Returns a CLLocation of the users most recent
+ * geographic location.
+ *
+ *
+ ***********************/
+-(CLLocation *)getUserLocation{
+    if(mostRecentLocation){
+        return mostRecentLocation;
+    }else{
+        //center of quad
+        return [[[CLLocation alloc] initWithLatitude:51.893483 longitude:-8.492083] autorelease];
+    }
+    
+}
 @end

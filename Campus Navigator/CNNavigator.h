@@ -41,6 +41,9 @@
 @property(nonatomic, retain) CLLocationManager *man;
 -(void)beginNavigationToLocation:(NSString *)location;
 -(void)voiceStringFromUser:(NSString *)voice;
+-(NSString *)getFourNearestWithDirections;
 -(BOOL)isNavigating;
 -(void)stopNav;
+-(CLLocation *)getUserLocation;
 @end
+

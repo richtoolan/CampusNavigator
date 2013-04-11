@@ -124,6 +124,9 @@
     }
     return [pathAction autorelease];
 }
+-(NSArray *)getNearestBuildings:(CLLocationCoordinate2D)userLoc withBearing:(double)bearing{
+    return [dao get:4 NearBuildingsWithLat:userLoc.latitude andLon:userLoc.longitude];
+}
 -(NSArray *)compareAndUpdateCoordinates:(NSArray*)points{
     if([points count] > 0 && [[points objectAtIndex:0]count]> 0){
     NSMutableArray *pointM = [[NSMutableArray alloc] initWithArray:points];
@@ -395,8 +398,9 @@
     //}
      */
     NSLog(@"%@", graph.description);
-    
+
 }
+
 -(NSArray *)getPathNodesForParent:(int)parent tillNode:(int)tillNode fromNode:(int)fromNode{
 
     NSMutableArray *allPoints = [[NSMutableArray alloc] init];

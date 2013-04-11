@@ -12,6 +12,8 @@
 @class CNMapViewController;
 @protocol CNOpenEarsDelegate
 -(void)giveStringLocation:(NSString *)text;
+-(void)generateVoiceForFiveNearest;
+-(void)saveFavouriteWithName:(NSString *)name;
 
 @end
 @protocol CNNavigatorDelegate
@@ -22,18 +24,19 @@
 -(void)annotationClickedWithString:(NSString *)string;
 
 @end
-@interface CNRootViewController : UIViewController<CNOpenEarsDelegate, RMMapViewDelegate, CNNavigatorDelegate>{
+@interface CNRootViewController : UIViewController<CNOpenEarsDelegate, RMMapViewDelegate, CNNavigatorDelegate, UITableViewDataSource, UITableViewDelegate>{
     //CNMapViewController *_mapView;
     CNOpenEars *openEars;
     NSArray *points;
+    NSArray *places;
     CNNavigator *navigator;
     CNMapViewController *mapView;
     //BOOL userVIP;
     BOOL userIdentified;
     BOOL userVip;
     UIButton *actionButton;
+    UILabel *buttonLabel;
     BOOL vibrateRequired;
-    
     
 }
 @property (nonatomic, retain) CNOpenEars *openEars;

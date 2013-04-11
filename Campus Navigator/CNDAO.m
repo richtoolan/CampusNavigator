@@ -48,19 +48,11 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
         //NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"appData.sqlite"];
         //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
         //[db open];
-        NSArray *paths;
-        NSString *docsPath;
-        if([CNUtils createEditableCopyOfDatabaseIfNeeded]){
-            paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            docsPath = [[paths objectAtIndex:0]  stringByAppendingPathComponent:@"appData.sqlite"];
-        }else{
-            //paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            docsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"appData.sqlite"];
-            
-            
-        }
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:@"appData.sqlite"];
         
-        db = [[FMDatabase databaseWithPath:docsPath ]retain];
+        db = [[FMDatabase databaseWithPath:writableDBPath ]retain];
         //db = [[[FMDatabase alloc] initWithPath:writableDBPath ] retain];
         [db open];
         
@@ -137,6 +129,19 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
     }
     [rs release];
     return [buildingList autorelease];
+   
+}
+-(NSArray *)getBuildingNames{
+    NSMutableArray *buildingList = [[NSMutableArray alloc] init];
+    NSString *query = [NSString stringWithFormat:@"SELECT * FROM buildingNodes"];
+    FMResultSet *rs = [[db executeQuery:query] retain];
+    
+    
+    while([rs next]){
+        [buildingList addObject:[rs stringForColumn:@"name"]];
+    }
+    [rs release];
+    return [buildingList autorelease];
     
 }
 -(BOOL)updateData:(NSString *)data fromTable:(NSString *)table{
@@ -144,6 +149,11 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
     //[db executeUpdate:@"INSERT INTO buildingNodes VALUES(8,'ATM','',0,0,50.0,8.0)"];
     //[db commit];
     return YES;
+}
+-(void)saveFavouriteWithName:(NSString *)name AndLocation:(CLLocation*)location{
+    [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO buildingNodes VALUES(NULL,'%@','',0,0,%f,%f)", name, location.coordinate.latitude, location.coordinate.longitude]];
+    [db commit];
+    
 }
 -(BOOL)removeData:(NSString *)data fromTable:(NSString *)table{
     return NO;
@@ -306,6 +316,8 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
             [correctDict setValue:[[[CLLocation alloc] initWithLatitude:[rs doubleForColumn:@"LAT"] longitude:[rs doubleForColumn:@"LON"]] autorelease] forKey:@"pointCoordinate"];
             [correctDict setValue:[NSNumber numberWithInt:[rs intForColumn:@"CONNECTIONS"]]forKey:@"CONNECTIONS"];
             [correctDict setValue:[NSNumber numberWithInt:[rs intForColumn:@"PARENT_ID"]] forKey:@"PARENT"];
+            [correctDict setValue:[NSNumber numberWithInt:[rs intForColumn:@"WARNINGS"]] forKey:@"WARNINGS"];
+            
             [allPoints addObject:correctDict];
             [correctDict release];
             
@@ -329,8 +341,8 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
     //test 1 and 2
     FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM pathNode WHERE PARENT_ID = 1"]];
     while ([rs next]) {
-        NSNumber *LAT = [[rs resultDict] objectForKey:@"lat"] ;
-        NSNumber *LON = [[rs resultDict] objectForKey:@"lon"];
+        NSNumber *LAT = [[rs resultDictionary] objectForKey:@"lat"] ;
+        NSNumber *LON = [[rs resultDictionary] objectForKey:@"lon"];
         FMResultSet *innerRS = [db executeQuery:[NSString stringWithFormat:@"SELECT distance(LAT, LON, %@, %@) as DISTANCE, * FROM pathNode WHERE PARENT_ID = 2 ORDER BY DISTANCE ASC", LAT, LON]];
         while([innerRS next]){
             NSLog(@"Distance between %i and %i is %f", [rs intForColumn:@"ID"], [innerRS intForColumn:@"ID"], [innerRS doubleForColumn:@"DISTANCE"]);
@@ -343,8 +355,8 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
             if([rs intForColumn:@"PARENT_ID"] == 2){
                 NSLog(@"YO");
             }
-            NSNumber *LAT = [[rs resultDict] objectForKey:@"lat"] ;
-            NSNumber *LON = [[rs resultDict] objectForKey:@"lon"];
+            NSNumber *LAT = [[rs resultDictionary] objectForKey:@"lat"] ;
+            NSNumber *LON = [[rs resultDictionary] objectForKey:@"lon"];
             int parent = [rs intForColumn:@"PARENT_ID"];
             
             FMResultSet *innerRS = [db executeQuery:[NSString stringWithFormat:@"SELECT distance(LAT, LON, %@, %@) as DISTANCE, * FROM pathNode WHERE DISTANCE < %f AND PARENT_ID != %i", LAT, LON , accuracy, parent]];
@@ -391,7 +403,21 @@ static void distanceFunc(sqlite3_context *context, int argc, sqlite3_value **arg
     return [db executeQuery:query];
 }
 
-
+-(NSArray *)get:(int)count NearBuildingsWithLat:(double)lat andLon:(double)lon{
+    NSMutableArray *buildings = [[NSMutableArray alloc] init];
+    FMResultSet *rs = [db executeQuery:[NSString stringWithFormat:@"SELECT distance(buildingLat, buildingLon, %f, %f) as DISTANCE, * FROM buildingNodes ORDER BY DISTANCE ASC LIMIT %i", lat, lon, count]];
+    while([rs next]){
+        NSMutableDictionary *correctDict = [[NSMutableDictionary alloc] init];
+        [correctDict setValue:[[[CLLocation alloc] initWithLatitude:[rs doubleForColumn:@"buildingLat"] longitude:[rs doubleForColumn:@"buildingLat"]] autorelease] forKey:@"buildingCoordinate"];
+        [correctDict setValue:[rs stringForColumn:@"name"] forKey:@"buildingName"];
+        [correctDict setValue:[NSNumber numberWithDouble:([rs doubleForColumn:@"distance"]/0.0010000)]forKey:@"buildingDistance"];
+        [buildings addObject:correctDict];
+        [correctDict release];
+        
+    }
+    return buildings;
+    
+}
 //-(void)allpaths(path,node){
 //cycle = path.substring(path.lastIndex(node)) + node
 //if path.contains(cycle)

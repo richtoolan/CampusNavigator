@@ -21,4 +21,5 @@
 -(NSArray *)generateDirectionObjects:(NSArray *)paths;
 -(NSArray *)compareAndUpdateCoordinates:(NSArray*)points;
 -(NSDictionary *)getNearestBuidingForString:(NSString *)building;
+-(NSArray *)getNearestBuildings:(CLLocationCoordinate2D)userLoc withBearing:(double)bearing;
 @end

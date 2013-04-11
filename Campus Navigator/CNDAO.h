@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 #import "sqlite3.h"
+@class CLLocation;
 @interface CNDAO : NSObject{
     FMDatabase *db;
     NSMutableArray *array;
@@ -23,4 +24,7 @@
 -(NSMutableArray *)testPathID:(int)val :(NSMutableArray *)arr dest:(int)dest;
 -(NSDictionary *)getNearestBuidingForString:(NSString *)building;
 -(NSArray *)getBuildingNodes;
+-(NSArray *)getBuildingNames;
+-(NSArray *)get:(int)count NearBuildingsWithLat:(double)lat andLon:(double)lon;
+-(void)saveFavouriteWithName:(NSString *)name AndLocation:(CLLocation*)location;
 @end

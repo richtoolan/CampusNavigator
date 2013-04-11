@@ -1,0 +1,3 @@
+#JSGF V1.0;
+grammar speech;
+public <spell> =  ( A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | W | Y | Z | SAVE )*
